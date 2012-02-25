@@ -1,0 +1,9 @@
+[user]
+	name = toro
+[alias]
+	st = status
+	ci = commit
+	co = checkout
+	br = branch
+[color]
+	ui = true
