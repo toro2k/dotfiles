@@ -1,0 +1,20 @@
+Config { 
+         font = "xft:DejaVu Sans:size=10:antialias=true"
+
+       , fgColor = "#eeeeec"
+       , bgColor = "#cc0000"
+
+       , border = NoBorder
+       , borderColor = ""
+
+       , position = Bottom
+
+       , sepChar  = "%"
+       , alignSep = "||"
+
+       , commands = [
+       	   Run StdinReader
+ 	 , Run Com "battery-status" [] "" 120
+         , Run Date "%d/%m/%Y @ %k:%M" "date" 60 ]
+       , template = "%StdinReader%||%battery-status% %date% "
+       }
