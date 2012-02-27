@@ -10,6 +10,8 @@
 (add-hook 'text-mode 'auto-fill-mode)
 
 (load "~/.elisp/haskell-mode/haskell-site-file")
+(add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
+(add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
 
 
 ;; UI
