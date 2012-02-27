@@ -1,5 +1,7 @@
 export PATH=~/bin:$PATH
 
+ssh-agent &
+
 unclutter -idle 5 -jitter 30 &
 syndaemon -i1 -k &
 
