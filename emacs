@@ -9,6 +9,8 @@
 (setq-default major-mode 'text-mode)
 (add-hook 'text-mode 'auto-fill-mode)
 
+(load "~/.elisp/haskell-mode/haskell-site-file")
+
 
 ;; UI
 (setq inhibit-startup-screen t)
