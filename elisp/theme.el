@@ -1,14 +1,14 @@
 (let ((black "#2E3436")
       (white "#EEEEEC")
-
       (dark-grey "#555753")
       (light-grey "#BABDB6")
-
       (green "#73d216")
       (red "#CC0000")
       (yellow "#FCE94F")
-      (blue "#729FCF"))
-
+      (blue "#729FCF")
+      (orange "#FCAF3E")
+      (dark-orange "#CE5C00")
+      (cyan "#34E2E2"))
 
   (set-face-attribute 'default nil :foreground white
 		      :background black)
@@ -44,25 +44,27 @@
 		      :foreground black
 		      :background light-grey)
 
-
-
   ;; font-lock-faces
-  (set-face-attribute 'font-lock-builtin-face nil)
+  (set-face-attribute 'font-lock-builtin-face nil
+		      :foreground blue)
   (set-face-attribute 'font-lock-comment-delimiter-face nil)
-  (set-face-attribute 'font-lock-comment-face nil)
+  (set-face-attribute 'font-lock-comment-face nil
+		      :foreground dark-orange
+		      :slant 'italic)
   (set-face-attribute 'font-lock-constant-face nil)
   (set-face-attribute 'font-lock-doc-face nil)
-  (set-face-attribute 'font-lock-function-name-face nil)
-  (set-face-attribute 'font-lock-keyword-face nil)
+  (set-face-attribute 'font-lock-function-name-face nil
+		      :foreground blue)
+  (set-face-attribute 'font-lock-keyword-face nil
+		      :foreground cyan)
   (set-face-attribute 'font-lock-negation-char-face nil)
   (set-face-attribute 'font-lock-preprocessor-face nil)
   (set-face-attribute 'font-lock-regexp-grouping-backslash nil)
   (set-face-attribute 'font-lock-regexp-grouping-construct nil)
-  (set-face-attribute 'font-lock-string-face nil)
-  (set-face-attribute 'font-lock-type-face nil)
-  (set-face-attribute 'font-lock-variable-name-face nil)
+  (set-face-attribute 'font-lock-string-face nil
+		      :foreground orange)
+  (set-face-attribute 'font-lock-type-face nil
+		      :foreground green)
+  (set-face-attribute 'font-lock-variable-name-face nil
+		      :foreground yellow)
   (set-face-attribute 'font-lock-warning-face nil))
-
-
-
-
