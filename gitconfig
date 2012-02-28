@@ -5,6 +5,7 @@
 	ci = commit
 	co = checkout
 	br = branch
+	graph = log --graph --oneline --decorate
 [color]
 	ui = true
 [log]
