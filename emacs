@@ -1,5 +1,4 @@
-(add-to-list 'load-path "~/.elisp/")
-(load "functions.el")
+(load "~/.elisp/functions.el")
 
 ;; autosave and backup
 (setq-default backup-inhibited t)
@@ -13,6 +12,8 @@
 (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
 (add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
 
+(load "~/.elisp/rinari/rinari.el")
+
 
 ;; UI
 (setq inhibit-startup-screen t)
@@ -23,7 +24,7 @@
     (progn
       (scroll-bar-mode nil)
       (tool-bar-mode nil)
-      (load "theme.el")
+      (load "~/.elisp/theme.el")
       ))
 
 
