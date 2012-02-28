@@ -1,6 +1,6 @@
 export PATH=~/bin:$PATH
 
-eval $(ssh-agent)
+pidof ssh-agent > /dev/null || eval $(ssh-agent)
 
 unclutter -idle 5 -jitter 30 &
 syndaemon -i1 -k &
