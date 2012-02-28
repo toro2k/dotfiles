@@ -1,5 +1,4 @@
-(add-to-list 'load-path "~/.elisp/")
-(load "functions.el")
+(load "~/.elisp/functions.el")
 
 ;; autosave and backup
 (setq-default backup-inhibited t)
@@ -23,7 +22,7 @@
     (progn
       (scroll-bar-mode nil)
       (tool-bar-mode nil)
-      (load "theme.el")
+      (load "~/.elisp/theme.el")
       ))
 
 
