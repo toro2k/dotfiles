@@ -24,6 +24,8 @@ export PS2='> '
 
 export PROMPT_DIRTRIM=2
 
+test -r /etc/bash_completion && source /etc/bash_completion
+
 # grep settings
 GREP_OPTIONS="--color -E"
 GREP_OPTIONS+=" --exclude-dir=.svn"
