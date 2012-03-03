@@ -1,9 +1,7 @@
 export PATH=~/bin:$PATH
 
-pidof ssh-agent > /dev/null || eval $(ssh-agent)
-
 unclutter -idle 5 -jitter 30 &
-syndaemon -i1 -k &
+syndaemon -i1 &
 
 xsetroot -solid black &
 xsetroot -cursor_name left_prt &
