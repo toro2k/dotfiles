@@ -27,7 +27,6 @@ export PROMPT_DIRTRIM=2
 test -r /etc/bash_completion && source /etc/bash_completion
 
 # grep settings
-GREP_OPTIONS="--color -E"
 GREP_OPTIONS+=" --exclude-dir=.svn"
 GREP_OPTIONS+=" --exclude-dir=.git"
 export GREP_OPTIONS
@@ -51,3 +50,4 @@ alias ll="ls -lh"
 alias la="ls -A"
 alias lla="ll -A"
 
+alias grep="grep --color -E -i"
