@@ -51,3 +51,7 @@ alias la="ls -A"
 alias lla="ll -A"
 
 alias grep="grep --color -E -i"
+
+
+### Load rvm
+test -f ~/.rvm/scripts/rvm && source ~/.rvm/scripts/rvm
