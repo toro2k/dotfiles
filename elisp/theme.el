@@ -13,7 +13,7 @@
   (set-face-attribute 'default nil :foreground white
 		      :background black)
   (if (member "DejaVu Sans Mono" (font-family-list))
-      (set-face-attribute 'default nil :font "-*-terminus-bold-*-*-*-16-*-*-*-*-*-*-*"))
+      (set-face-attribute 'default nil :font "-*-terminus-bold-*-*-*-14-*-*-*-*-*-*-*"))
 
 
   ;; UI faces
