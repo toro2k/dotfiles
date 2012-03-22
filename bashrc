@@ -5,6 +5,7 @@
 shopt -s -o noclobber
 shopt -s cdspell
 shopt -s extglob
+shopt -s globstar
 shopt -s no_empty_cmd_completion
 
 ##########
