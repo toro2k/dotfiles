@@ -36,4 +36,7 @@
 (global-set-key (kbd "C-t C-n") 'toro-mark-whole-line)
 (global-set-key (kbd "C-t n") 'toro-mark-whole-line)
 
-
+(global-set-key (kbd "M-'") 'toro-insert-single-quotes)
+(global-set-key (kbd "M-\"") 'toro-insert-double-quotes)
+(global-set-key (kbd "M-[") 'toro-insert-brackets)
+(global-set-key (kbd "M-{") 'toro-insert-braces)
