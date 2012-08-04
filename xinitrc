@@ -11,4 +11,4 @@ xrandr --output LVDS1 --auto &
 xset +fp /usr/share/fonts/local
 xset fp rehash
 
-exec xmonad
+exec $1
