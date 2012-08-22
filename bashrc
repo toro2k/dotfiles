@@ -8,33 +8,25 @@ shopt -s extglob
 shopt -s globstar
 shopt -s no_empty_cmd_completion
 
+
 ##########
 # Environment
 ##########
-
-export PATH="$PATH"
 
 export PAGER=less
 
 export VISUAL=emacs
 export EDITOR=vi
 
-# prompting
 export PS1='\n\w \[\e[1;31m\]\$\$\[\e[0m\] '
 export PS2='> '
-
 export PROMPT_DIRTRIM=2
 
-test -r /etc/bash_completion && source /etc/bash_completion
-
-# grep settings
 GREP_OPTIONS+=" --exclude-dir=.svn"
 GREP_OPTIONS+=" --exclude-dir=.git"
 export GREP_OPTIONS
 
-# less options
-LESS='-i -r'
-export LESS
+export LESS='-i -r'
 
 
 ##########
@@ -54,5 +46,27 @@ alias lla="ll -A"
 alias grep="grep --color -E -i"
 
 
-### Load rvm
-test -f ~/.rvm/scripts/rvm && source ~/.rvm/scripts/rvm
+##########
+# Functions
+##########
+
+function vibash
+{
+  vi -n + $HOME/.bashrc
+  source $HOME/.bashrc
+}
+
+
+##########
+# Load scripts
+##########
+
+test -r /etc/bash_completion && source /etc/bash_completion
+test -r ~/.rvm/scripts/rvm && source ~/.rvm/scripts/rvm
+
+
+##########
+# Quickies
+##########
+
+
