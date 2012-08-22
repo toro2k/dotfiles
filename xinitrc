@@ -6,9 +6,6 @@ syndaemon -i1 &
 xsetroot -solid black &
 xsetroot -cursor_name left_prt &
 
-xrandr --output LVDS1 --auto &
+xrandr --output LVDS1 --auto
 
-xset +fp /usr/share/fonts/local
-xset fp rehash
-
-exec $1
+exec xmonad
