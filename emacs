@@ -12,8 +12,6 @@
 (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
 (add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
 
-(load "~/.elisp/rinari/rinari.el")
-
 
 ;; UI
 (setq inhibit-startup-screen t)
@@ -40,3 +38,7 @@
 (global-set-key (kbd "M-\"") 'toro-insert-double-quotes)
 (global-set-key (kbd "M-[") 'toro-insert-brackets)
 (global-set-key (kbd "M-{") 'toro-insert-braces)
+
+
+;; ?!?
+(setq-default parens-require-spaces nil)
