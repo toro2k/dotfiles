@@ -9,6 +9,6 @@ xsetroot -cursor_name left_prt &
 xrandr --output LVDS --auto
 xrandr --output VGA-0 --auto --right-of LVDS 
 
-test -f .Xresources && xrdb -merge .Xresources
+test -f .Xresources && xrdb .Xresources
 
 exec xmonad
