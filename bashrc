@@ -12,8 +12,6 @@ shopt -s no_empty_cmd_completion
 # Environment
 ##########
 
-export PATH="$PATH"
-
 export PAGER=less
 
 export VISUAL=emacs
@@ -53,6 +51,8 @@ alias lla="ll -A"
 
 alias grep="grep --color -E -i"
 
+alias x="ssh-agent startx"
 
 ### Load rvm
 test -f ~/.rvm/scripts/rvm && source ~/.rvm/scripts/rvm
+
