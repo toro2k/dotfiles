@@ -15,7 +15,7 @@ shopt -s no_empty_cmd_completion
 
 export PAGER=less
 
-export VISUAL=emacs
+export VISUAL=vi
 export EDITOR=vi
 
 export PS1='\n\w \[\e[1;31m\]\$\$\[\e[0m\] '
