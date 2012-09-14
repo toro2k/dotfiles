@@ -17,6 +17,7 @@ export PAGER=less
 
 export VISUAL=vi
 export EDITOR=vi
+export PSQL_EDITOR='emacs -nw'
 
 export PS1='\n\w \[\e[1;31m\]\$\$\[\e[0m\] '
 export PS2='> '
