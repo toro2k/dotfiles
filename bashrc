@@ -45,7 +45,11 @@ alias lla="ll -A"
 
 alias grep="grep --color -E -i"
 
-alias x="ssh-agent startx"
+if [ ! -z $(which logger) -a -x $(which logger) ]; then
+    alias x="ssh-agent startx |& logger --tag xsession --priority user.info"
+else
+    alias x="ssh-agent startx"
+fi
 
 
 ##########
@@ -70,5 +74,4 @@ test -r ~/.rvm/scripts/rvm && source ~/.rvm/scripts/rvm
 ##########
 # Quickies
 ##########
-
 
