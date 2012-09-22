@@ -17,8 +17,13 @@ export PAGER=less
 
 export VISUAL=vi
 export EDITOR=vi
+export PSQL_EDITOR='emacs -nw'
 
-export PS1='\n\w \[\e[1;31m\]\$\$\[\e[0m\] '
+if [ -z $SSH_TTY ]; then
+  export PS1='\n\w \[\e[1;31m\]\$\$\[\e[0m\] '
+else
+  export PS1='\n[\h] \w \[\e[1;33m\]\$\$\[\e[0m\] '
+fi
 export PS2='> '
 export PROMPT_DIRTRIM=2
 
