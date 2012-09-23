@@ -13,6 +13,9 @@ shopt -s no_empty_cmd_completion
 # Environment
 ##########
 
+test -d ~/bin && export PATH=~/bin:$PATH
+test -d ~/.gem/ruby/1.9.1/bin && export PATH=~/.gem/ruby/1.9.1/bin:$PATH
+
 export PAGER=less
 
 export VISUAL=vi
@@ -24,6 +27,7 @@ if [ -z $SSH_TTY ]; then
 else
   export PS1='\n[\h] \w \[\e[1;33m\]\$\$\[\e[0m\] '
 fi
+
 export PS2='> '
 export PROMPT_DIRTRIM=2
 
@@ -55,6 +59,9 @@ if [ ! -z $(which logger) -a -x $(which logger) ]; then
 else
     alias x="ssh-agent startx"
 fi
+
+alias poweroff="sudo /sbin/poweroff"
+alias reboot="sudo /sbin/reboot"
 
 
 ##########
