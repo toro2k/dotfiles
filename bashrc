@@ -35,7 +35,7 @@ GREP_OPTIONS+=" --exclude-dir=.svn"
 GREP_OPTIONS+=" --exclude-dir=.git"
 export GREP_OPTIONS
 
-export LESS='-i -r'
+export LESS='-i -R'
 
 
 ##########
