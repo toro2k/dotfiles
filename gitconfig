@@ -11,3 +11,6 @@
 	ui = true
 [log]
 	abbrevCommit = true
+
+[pager]
+	stash = false
