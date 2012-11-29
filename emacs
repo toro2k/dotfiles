@@ -8,9 +8,18 @@
 (setq-default major-mode 'text-mode)
 (add-hook 'text-mode 'auto-fill-mode)
 
+(setq ruby-indent-tabs-mode t)
+(setq-default ruby-insert-encoding-magic-comment nil)
+
 (load "~/.elisp/haskell-mode/haskell-site-file")
 (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
 (add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
+
+(add-to-list 'auto-mode-alist '("psql.edit" . sql-mode))
+
+
+;; hooks
+(add-hook 'before-save-hook 'delete-trailing-whitespace)
 
 
 ;; UI
@@ -33,6 +42,7 @@
 (global-set-key (kbd "C-t ;") 'comment-or-uncomment-region)
 (global-set-key (kbd "C-t C-n") 'toro-mark-whole-line)
 (global-set-key (kbd "C-t n") 'toro-mark-whole-line)
+(global-set-key (kbd "C-t \\") 'toro-squeeze-spaces)
 
 (global-set-key (kbd "M-'") 'toro-insert-single-quotes)
 (global-set-key (kbd "M-\"") 'toro-insert-double-quotes)
@@ -40,5 +50,8 @@
 (global-set-key (kbd "M-{") 'toro-insert-braces)
 
 
-;; ?!?
+;; misc
 (setq-default parens-require-spaces nil)
+(put 'narrow-to-region 'disabled nil)
+
+(setq-default tab-width 2)

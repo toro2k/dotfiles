@@ -25,3 +25,11 @@
 (defun toro-insert-braces ()
   (interactive)
   (insert-pair nil ?{ ?}))
+
+
+
+(defun toro-squeeze-spaces ()
+	(interactive)
+	(progn
+		(delete-horizontal-space)
+		(insert " ")))
