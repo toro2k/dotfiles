@@ -1,4 +1,6 @@
-(load "~/.elisp/functions.el")
+(add-to-list 'load-path "~/.elisp")
+(require 'toro-functions)
+
 
 ;; autosave and backup
 (setq-default backup-inhibited t)

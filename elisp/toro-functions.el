@@ -1,14 +1,12 @@
 (defun toro-mark-whole-line ()
   (interactive)
-  (progn 
+  (progn
     (beginning-of-line)
     (set-mark-command nil)
     (next-line)))
 
-
 (defun toro-xwindow-p ()
   (string= "x" window-system))
-
 
 (defun toro-insert-single-quotes ()
   (interactive)
@@ -26,10 +24,11 @@
   (interactive)
   (insert-pair nil ?{ ?}))
 
-
-
 (defun toro-squeeze-spaces ()
 	(interactive)
 	(progn
 		(delete-horizontal-space)
 		(insert " ")))
+
+
+(provide 'toro-functions)
