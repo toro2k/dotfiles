@@ -15,6 +15,9 @@
 (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
 (add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
 
+(load "~/.elisp/java-mode-indent-annotations.el")
+(add-hook 'java-mode-hook 'java-mode-indent-annotations-setup)
+
 (add-to-list 'auto-mode-alist '("psql.edit" . sql-mode))
 
 
