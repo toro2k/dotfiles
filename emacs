@@ -1,9 +1,14 @@
 (add-to-list 'load-path "~/.elisp")
 (require 'toro-functions)
 
-
 ;; autosave and backup
 (setq-default backup-inhibited t)
+
+
+;; smart tabs
+(require 'smart-indent)
+(smart-tabs-advice ruby-indent-line ruby-indent-level)
+(setq ruby-indent-tabs-mode t)
 
 
 ;; modes settings
@@ -17,7 +22,7 @@
 (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
 (add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
 
-(load "~/.elisp/java-mode-indent-annotations.el")
+(require 'java-mode-indent-annotations)
 (add-hook 'java-mode-hook 'java-mode-indent-annotations-setup)
 
 (add-to-list 'auto-mode-alist '("psql.edit" . sql-mode))
