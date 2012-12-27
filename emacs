@@ -26,6 +26,7 @@
 (add-hook 'java-mode-hook 'java-mode-indent-annotations-setup)
 
 (add-to-list 'auto-mode-alist '("psql.edit" . sql-mode))
+(add-to-list 'auto-mode-alist '("emacs" . lisp-mode))
 
 
 ;; hooks

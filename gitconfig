@@ -3,6 +3,7 @@
 	ci = commit
 	co = checkout
 	br = branch
+	wc = log --stat
 	graph = log --graph --oneline --decorate
 	unadd = reset HEAD
   svnci = svn dcommit
