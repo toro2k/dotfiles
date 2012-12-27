@@ -1,0 +1,26 @@
+#!/bin/sh
+
+test -x $(which osd_cat) || {
+		echo 'osd_cat must be in PATH'
+		exit 1
+}
+
+case $1 in
+		'urgent')
+				color='#cc0000'
+				;;
+		'warn')
+				color='#fcaf3e'
+				;;
+		*)
+				color='#73d216'
+				;;
+esac
+
+osd_cat \
+		--font=-*-terminus-bold-*-*-*-32-*-*-*-*-*-*-* \
+		--alig=right \
+		--offset=10 \
+		--indent=10 \
+		--colour=$color
+
