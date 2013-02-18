@@ -22,5 +22,6 @@ osd_cat \
 		--alig=right \
 		--offset=10 \
 		--indent=10 \
-		--colour=$color
+		--colour=$color \
+                --shadow=3
 

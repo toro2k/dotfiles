@@ -1,9 +1,8 @@
 (defun toro-mark-whole-line ()
   (interactive)
-  (progn
-    (beginning-of-line)
-    (set-mark-command nil)
-    (next-line)))
+	(beginning-of-line)
+	(set-mark-command nil)
+	(next-line))
 
 (defun toro-xwindow-p ()
   (string= "x" window-system))
@@ -26,9 +25,20 @@
 
 (defun toro-squeeze-spaces ()
 	(interactive)
-	(progn
-		(delete-horizontal-space)
-		(insert " ")))
+	(delete-horizontal-space)
+	(insert " "))
 
+(defun toro-current-buffer-file-name ()
+	(interactive)
+	(let ((current-buffer-file-name
+				 (buffer-file-name (current-buffer))))
+		(if current-buffer-file-name
+				(message current-buffer-file-name)
+			(message "no file name"))))
+
+(defun toro-create-etags (dir)
+	(interactive "DDirectory: ")
+	(shell-command
+	 (format "ctags -f %s/TAGS -e -R %s &> /dev/null" dir dir)))
 
 (provide 'toro-functions)
