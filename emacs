@@ -1,49 +1,8 @@
 (add-to-list 'load-path "~/.elisp")
 (require 'toro-functions)
-
-;; autosave and backup
-(setq-default backup-inhibited t)
-
-
-;; smart tabs
-(require 'smart-indent)
-(smart-tabs-advice ruby-indent-line ruby-indent-level)
-(setq ruby-indent-tabs-mode t)
-
-
-;; modes settings
-(setq-default major-mode 'text-mode)
-(add-hook 'text-mode 'auto-fill-mode)
-
-(setq ruby-indent-tabs-mode t)
-(setq-default ruby-insert-encoding-magic-comment nil)
-
-(load "~/.elisp/haskell-mode/haskell-site-file")
-(add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
-(add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
-
 (require 'java-mode-indent-annotations)
-(add-hook 'java-mode-hook 'java-mode-indent-annotations-setup)
 
-(add-to-list 'auto-mode-alist '("psql.edit" . sql-mode))
-(add-to-list 'auto-mode-alist '("emacs" . lisp-mode))
-
-
-;; hooks
-(add-hook 'before-save-hook 'delete-trailing-whitespace)
-
-
-;; UI
-(setq inhibit-startup-screen t)
-(defalias 'yes-or-no-p 'y-or-n-p)
-(menu-bar-mode nil)
-
-(if (toro-xwindow-p)
-    (progn
-      (scroll-bar-mode nil)
-      (tool-bar-mode nil)
-      (load "~/.elisp/theme.el")
-      ))
+(byte-recompile-directory "~/.elisp" 0)
 
 
 ;; keys
@@ -61,8 +20,46 @@
 (global-set-key (kbd "M-{") 'toro-insert-braces)
 
 
+;; autosave and backup
+(setq-default backup-inhibited t)
+
+
+;; modes settings
+(setq-default major-mode 'text-mode)
+(add-hook 'text-mode-hook 'auto-fill-mode)
+
+(add-to-list 'auto-mode-alist '("psql.edit" . sql-mode))
+(add-to-list 'auto-mode-alist '("emacs" . lisp-mode))
+(add-to-list 'auto-mode-alist '("Rakefile" . ruby-mode))
+(add-to-list 'auto-mode-alist '("Gemfile" . ruby-mode))
+
+(setq-default ruby-insert-encoding-magic-comment nil)
+(when (getenv "IXENIA")
+  (progn
+    (require 'smart-indent)
+    (smart-tabs-advice ruby-indent-line ruby-indent-level)
+    (setq ruby-indent-tabs-mode t)
+    (add-hook 'ruby-mode-hook (lambda () (set-default 'tab-width 2)))))
+
+(add-hook 'java-mode-hook 'java-mode-indent-annotations-setup)
+
+
+;; hooks
+(add-hook 'before-save-hook 'delete-trailing-whitespace)
+
+
+;; UI
+(setq inhibit-startup-screen t)
+(defalias 'yes-or-no-p 'y-or-n-p)
+(menu-bar-mode nil)
+
+(if (toro-xwindow-p)
+    (progn
+      (scroll-bar-mode nil)
+      (tool-bar-mode nil)
+      (load "~/.elisp/theme.el")))
+
+
 ;; misc
 (setq-default parens-require-spaces nil)
 (put 'narrow-to-region 'disabled nil)
-
-(setq-default tab-width 2)
