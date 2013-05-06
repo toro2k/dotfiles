@@ -58,7 +58,9 @@
     (progn
       (scroll-bar-mode nil)
       (tool-bar-mode nil)
-      (load "~/.elisp/theme.el")))
+      (set-cursor-color "#ffff00")
+      (if (member "terminus" (font-family-list))
+	  (set-face-attribute 'default nil :font "-*-terminus-bold-*-*-*-14-*-*-*-*-*-*-*"))))
 
 
 ;; misc
