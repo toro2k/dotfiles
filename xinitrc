@@ -1,13 +1,10 @@
-export PATH=~/bin:$PATH
-
 unclutter -idle 5 -jitter 30 &
-#syndaemon -i1 &
 
 xsetroot -solid black &
 xsetroot -cursor_name left_prt &
 
-xrandr --output LVDS --auto
-xrandr --output VGA-0 --auto --right-of LVDS 
+xrandr --output VGA-0 --mode 1920x1080 --pos 0x768 --rotate normal \
+    --output LVDS --mode 1366x768 --pos 0x0 --rotate normal --output HDMI-0 --off
 
 test -f .Xresources && xrdb .Xresources
 
