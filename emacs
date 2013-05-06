@@ -1,5 +1,6 @@
 (add-to-list 'load-path "~/.elisp")
 (require 'toro-functions)
+(require 'yaml-mode)
 (require 'java-mode-indent-annotations)
 
 (byte-recompile-directory "~/.elisp" 0)
