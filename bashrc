@@ -13,9 +13,6 @@ shopt -s no_empty_cmd_completion
 # Environment
 ##########
 
-test -d ~/bin && export PATH=~/bin:$PATH
-test -d ~/.gem/ruby/1.9.1/bin && export PATH=~/.gem/ruby/1.9.1/bin:$PATH
-
 export PAGER=less
 
 export VISUAL=vi
@@ -23,7 +20,7 @@ export EDITOR=vi
 export PSQL_EDITOR='emacs -nw'
 
 if [ -z $SSH_TTY ]; then
-  export PS1='\n\w \[\e[1;31m\]\$\$\[\e[0m\] '
+  export PS1='\n\w \[\e[1;32m\]\$\$\[\e[0m\] '
 else
   export PS1='\n[\h] \w \[\e[1;33m\]\$\$\[\e[0m\] '
 fi
