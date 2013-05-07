@@ -58,9 +58,12 @@
     (progn
       (scroll-bar-mode nil)
       (tool-bar-mode nil)
+      (set-face-attribute 'default nil :foreground "#eeeeec"
+			  :background "#2e3436")
       (set-cursor-color "#ffff00")
       (if (member "terminus" (font-family-list))
-	  (set-face-attribute 'default nil :font "-*-terminus-bold-*-*-*-14-*-*-*-*-*-*-*"))))
+	  (set-face-attribute 'default nil
+			      :font "-*-terminus-bold-*-*-*-14-*-*-*-*-*-*-*"))))
 
 
 ;; misc
