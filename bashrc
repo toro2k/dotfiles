@@ -13,7 +13,7 @@ shopt -s no_empty_cmd_completion
 # Environment
 ##########
 
-export PAGER=less
+export PAGER=most
 
 export VISUAL=vi
 export EDITOR=vi
