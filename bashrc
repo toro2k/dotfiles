@@ -50,6 +50,7 @@ alias la="ls -A"
 alias lla="ll -A"
 
 alias grep="grep --color -E -i"
+alias sed="sed -r"
 
 if [ ! -z $(which logger) -a -x $(which logger) ]; then
     alias x="ssh-agent startx |& logger --tag xsession --priority user.info"
