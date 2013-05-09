@@ -25,6 +25,7 @@ else
   export PS1='\n[\h] \w \[\e[1;33m\]\$\$\[\e[0m\] '
 fi
 
+export PROMPT_COMMAND='echo -ne "\033]0;${PWD}\007"'
 export PS2='> '
 export PROMPT_DIRTRIM=2
 
