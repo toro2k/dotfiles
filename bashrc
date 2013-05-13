@@ -5,15 +5,23 @@
 shopt -s -o noclobber
 shopt -s cdspell
 shopt -s extglob
-shopt -s globstar
 shopt -s no_empty_cmd_completion
 
+shopt -s globstar
+
+command_exists() {
+		command -v "$1" 2>&1 > /dev/null
+}
 
 ##########
 # Environment
 ##########
 
-export PAGER=most
+if command_exists most; then
+  export PAGER=most
+else
+  export PAGER=less
+fi
 
 export VISUAL=vi
 export EDITOR=vi
@@ -25,7 +33,14 @@ else
   export PS1='\n[\h] \w \[\e[1;33m\]\$\$\[\e[0m\] '
 fi
 
-export PROMPT_COMMAND='echo -ne "\033]0;${PWD}\007"'
+if [ 'xterm' = $TERM ]; then
+  if [ -z $SSH_TTY ]; then
+    export PROMPT_COMMAND='echo -ne "\033]0;${PWD}\007"'
+  else
+    export PROMPT_COMMAND='echo -ne "\033]0;[${HOSTNAME}] ${PWD}\007"'
+  fi
+fi
+
 export PS2='> '
 export PROMPT_DIRTRIM=2
 
@@ -33,6 +48,7 @@ GREP_OPTIONS+=" --exclude-dir=.svn"
 GREP_OPTIONS+=" --exclude-dir=.git"
 export GREP_OPTIONS
 
+export MOST_SWITCHES='-w'
 export LESS='-i -R'
 
 
@@ -53,7 +69,7 @@ alias lla="ll -A"
 alias grep="grep --color -E -i"
 alias sed="sed -r"
 
-if [ ! -z $(which logger) -a -x $(which logger) ]; then
+if command_exists logger; then
     alias x="ssh-agent startx |& logger --tag xsession --priority user.info"
 else
     alias x="ssh-agent startx"
