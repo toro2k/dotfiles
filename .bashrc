@@ -10,7 +10,7 @@ shopt -s no_empty_cmd_completion
 shopt -s globstar
 
 command_exists() {
-		command -v "$1" 2>&1 > /dev/null
+    command -v "$1" 2>&1 > /dev/null
 }
 
 ##########
@@ -66,7 +66,7 @@ alias ll="ls -lh"
 alias la="ls -A"
 alias lla="ll -A"
 
-alias grep="grep --color -E -i"
+alias grep="grep --color -E"
 alias sed="sed -r"
 
 if command_exists logger; then

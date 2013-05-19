@@ -8,4 +8,4 @@ xsetroot -cursor_name left_prt &
 
 test -f .Xresources && xrdb .Xresources
 
-exec xmonad
+exec i3

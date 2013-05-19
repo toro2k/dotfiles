@@ -1,0 +1,39 @@
+! Black
+!*color0: #2e3436
+!*color8: #555753
+
+! red
+!*color1: #cc0000
+!*color9: #ef2929
+
+! green
+!*color2: #4e9a06
+!*color10: #8ae234
+
+! yellow
+!*color3: #c4a000
+!*color11: #fce94f
+
+! blue
+!*color4: #3465a4
+!*color12: #729fcf
+
+! purple
+!*color5: #ff0000
+!*color13: #00ff01
+
+!cyan
+!*color6: #208787
+!*color14: #72cfcf
+
+!white
+!*color7: #d3d7cf
+!*color15: #eeeeec
+
+
+xterm*font: -*-terminus-bold-*-*-*-14-*-*-*-*-*-*-*
+xterm*allowBoldFonts: false
+xterm*background: #2e3436
+xterm*foreground: #eeeeec
+xterm*metaSendEscape: true
+xterm*eightBitInput: false
