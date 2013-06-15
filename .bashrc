@@ -97,7 +97,9 @@ function vibash
 ##########
 
 test -r /etc/bash_completion && source /etc/bash_completion
-test -r ~/.rvm/scripts/rvm && source ~/.rvm/scripts/rvm
+if command_exists rbenv; then
+    eval "$(rbenv init -)"
+fi
 
 
 ##########
