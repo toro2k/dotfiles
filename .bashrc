@@ -71,15 +71,7 @@ alias lla="ll -A"
 alias grep="grep --color -E"
 alias sed="sed -r"
 
-if command_exists logger; then
-    alias x="ssh-agent startx |& logger --tag xsession --priority user.info"
-else
-    alias x="ssh-agent startx"
-fi
-
-alias poweroff="sudo /sbin/poweroff"
-alias reboot="sudo /sbin/reboot"
-
+alias apt-mine="aptitude search '~i!~M!(~prequired|~pimportant)'"
 
 ##########
 # Functions
