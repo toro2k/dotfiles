@@ -33,7 +33,7 @@ else
   export PS1='\n[\h] \w \[\e[1;33m\]\$\$\[\e[0m\] '
 fi
 
-if [ 'xterm' = $TERM ]; then
+if [[ $TERM == 'xterm' || $TERM =~ 'rxvt' ]]; then
   if [ -z $SSH_TTY ]; then
     export PROMPT_COMMAND='echo -ne "\033]0;${PWD}\007"'
   else
