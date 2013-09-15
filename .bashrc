@@ -1,21 +1,25 @@
-##########
-# Shell options
-##########
+# Functions
 
-shopt -s -o noclobber
-shopt -s cdspell
-shopt -s extglob
-shopt -s no_empty_cmd_completion
-
-shopt -s globstar
+vibash() {
+  vi -n + $HOME/.bashrc
+  source $HOME/.bashrc
+}
 
 command_exists() {
     command -v "$1" 2>&1 > /dev/null
 }
 
-##########
+
+# Shell options
+
+shopt -s -o noclobber
+shopt -s cdspell
+shopt -s extglob
+shopt -s no_empty_cmd_completion
+shopt -s globstar
+
+
 # Environment
-##########
 
 export PAGER=less
 
@@ -40,6 +44,7 @@ fi
 export PS2='> '
 export PROMPT_DIRTRIM=2
 
+GREP_OPTIONS+=" -E"
 GREP_OPTIONS+=" --exclude-dir=.svn"
 GREP_OPTIONS+=" --exclude-dir=.git"
 export GREP_OPTIONS
@@ -54,9 +59,7 @@ export LESS_TERMCAP_ue=$'\E[0m'
 export LESS_TERMCAP_us=$'\E[01;32m'
 
 
-##########
 # Aliaes
-##########
 
 alias cp="cp -i"
 alias mv="mv -i"
@@ -68,33 +71,19 @@ alias ll="ls -lh"
 alias la="ls -A"
 alias lla="ll -A"
 
-alias grep="grep --color -E"
+command_exists ack-grep && alias ack="ack-grep"
+alias grep="grep --color"
 alias sed="sed -r"
 
 alias apt-mine="aptitude search '~i!~M!(~prequired|~pimportant)'"
-
-##########
-# Functions
-##########
-
-function vibash
-{
-  vi -n + $HOME/.bashrc
-  source $HOME/.bashrc
-}
+alias apt-unneeded="aptitude search '~i~M!~RDepends:~i'"
 
 
-##########
 # Load scripts
-##########
 
 test -r /etc/bash_completion && source /etc/bash_completion
-if command_exists rbenv; then
-    eval "$(rbenv init -)"
-fi
+command_exists rbenv && eval "$(rbenv init -)"
 
 
-##########
-# Quickies
-##########
+# Temp
 
