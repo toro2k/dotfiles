@@ -16,11 +16,7 @@ colorscheme slate
 hi Normal guibg=#2e3436
 hi NonText guibg=#2e3436
 
+" remove trailing spaces on save
+autocmd BufWritePre * :%s/\s\+$//e
 
-function! Foo(arg)
-    if type(a:arg) == type('')
-        echo "It's a string"
-    else
-        echo "Not a string"
-    endif
-endfunction
+let NERDSpaceDelims=1
