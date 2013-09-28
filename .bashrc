@@ -44,7 +44,6 @@ fi
 export PS2='> '
 export PROMPT_DIRTRIM=2
 
-GREP_OPTIONS+=" -E"
 GREP_OPTIONS+=" --exclude-dir=.svn"
 GREP_OPTIONS+=" --exclude-dir=.git"
 export GREP_OPTIONS
@@ -75,8 +74,10 @@ command_exists ack-grep && alias ack="ack-grep"
 alias grep="grep --color"
 alias sed="sed -r"
 
-alias apt-mine="aptitude search '~i!~M!(~prequired|~pimportant)'"
-alias apt-unneeded="aptitude search '~i~M!~RDepends:~i'"
+alias apt-mine="aptitude search '~i !~M !(~prequired|~pimportant)'"
+alias apt-unneeded="aptitude search '~i ~M !~RDepends:~i'"
+alias apt-unstable="aptitude versions \
+    '~VCURRENT ~Aunstable !~Atesting' --group-by=none"
 
 
 # Load scripts
