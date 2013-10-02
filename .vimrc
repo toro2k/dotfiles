@@ -12,11 +12,11 @@ set ignorecase
 set smartcase
 set hlsearch
 
-colorscheme slate
-hi Normal guibg=#2e3436
-hi NonText guibg=#2e3436
+colorscheme toro2k
 
-" remove trailing spaces on save
+" Remove trailing spaces on save
 autocmd BufWritePre * :%s/\s\+$//e
 
+" Put a space between comment characters and the
+" beginning of the commented line.
 let NERDSpaceDelims=1
