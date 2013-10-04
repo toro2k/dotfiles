@@ -39,7 +39,7 @@ xterm*metaSendEscape: true
 xterm*eightBitInput: false
 
 URxvt*background: #2e3436
-URxvt*foreground: #eeeeec
+URxvt*foreground: #ffffff
 URxvt*font: xft:DejaVu Sans Mono:size=10
 URxvt*boldFont: xft:DejaVu Sans Mono:size=10
 URxvt*letterSpace: -1
