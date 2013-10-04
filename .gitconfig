@@ -15,3 +15,6 @@
 
 [pager]
 	stash = false
+[user]
+	name = toro2k
+	email = toro2k@gmail.com
