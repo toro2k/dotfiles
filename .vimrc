@@ -22,3 +22,5 @@ autocmd BufWritePre * :%s/\s\+$//e
 " Put a space between comment characters and the
 " beginning of the commented line.
 let NERDSpaceDelims=1
+
+map <silent> <leader>tt :NERDTreeToggle<CR>
