@@ -13,6 +13,3 @@
 [submodule ".vim/bundle/nerdtree"]
 	path = .vim/bundle/nerdtree
 	url = https://github.com/scrooloose/nerdtree.git
-[submodule ".vim/bundle/vim-plugin-minibufexpl"]
-	path = .vim/bundle/vim-plugin-minibufexpl
-	url = https://github.com/techlivezheng/vim-plugin-minibufexpl.git
