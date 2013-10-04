@@ -27,8 +27,8 @@
 *color14: #72cfcf
 
 !white
-*color7: #d3d7cf
-*color15: #eeeeec
+*color7: #eeeeec
+*color15: #ffffff
 
 
 xterm*font: -*-terminus-bold-*-*-*-14-*-*-*-*-*-*-*
@@ -42,7 +42,7 @@ URxvt*background: #2e3436
 URxvt*foreground: #eeeeec
 URxvt*font: xft:DejaVu Sans Mono:size=10
 URxvt*boldFont: xft:DejaVu Sans Mono:size=10
-! URxvt*letterSpace: -1
+URxvt*letterSpace: -1
 URxvt*scrollBar: false
 URxvt.perl-lib: /home/toro2k/.urxvt/perl
 URxvt.perl-ext-common: keyboard-select
