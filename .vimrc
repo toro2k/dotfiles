@@ -24,6 +24,7 @@ set tildeop
 colorscheme toro2k
 
 " Remove trailing spaces on save
+autocmd BufNewFile,BufRead *.spec set filetype=ruby
 autocmd BufWritePre * :%s/\s\+$//e
 
 map j gj
