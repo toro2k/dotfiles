@@ -24,6 +24,9 @@ set tildeop
 set foldmethod=indent
 set foldlevelstart=1
 
+set nobackup
+set nowritebackup
+set noswapfile
 
 colorscheme toro2k
 
