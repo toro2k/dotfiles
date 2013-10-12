@@ -21,6 +21,10 @@ set hlsearch
 
 set tildeop
 
+set foldmethod=indent
+set foldlevelstart=1
+
+
 colorscheme toro2k
 
 " Remove trailing spaces on save
