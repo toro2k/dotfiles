@@ -30,18 +30,21 @@ set noswapfile
 
 colorscheme toro2k
 
-" Remove trailing spaces on save
+autocmd BufWritePre * :%s/\s\+$//e " Remove trailing spaces on save
 autocmd BufNewFile,BufRead *.spec set filetype=ruby
-autocmd BufWritePre * :%s/\s\+$//e
 
 map j gj
 map k gk
 map 0 ^
+map Y y$
+
 map <leader>ba :edit #<cr>
 map <leader>hh :set hlsearch! hlsearch?<cr>
 
 
-" plugin specific, maybe are better placed in after/plugin?
+
+" PLUGIN SPECIFIC STUFF
+" maybe are better placed in after/plugin?
 
 map <silent> <leader>tt :NERDTreeToggle<cr>
 
