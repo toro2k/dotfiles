@@ -5,6 +5,7 @@ floating_modifier $mod
 
 focus_follows_mouse no
 
+for_window [class="Gmrun"] floating enable
 
 ### BINDINGS ###
 # start a terminal
@@ -14,7 +15,7 @@ bindsym $mod+Return exec i3-sensible-terminal
 bindsym $mod+Shift+Q kill
 
 # start dmenu (a program launcher)
-bindsym $mod+d exec dmenu_run -fn -*-terminus-bold-*-*-*-14-*-*-*-*-*-*-*
+bindsym $mod+d exec gmrun
 
 # change focus
 bindsym $mod+h focus left
