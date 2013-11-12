@@ -1,20 +1,29 @@
 [alias]
-	st = status
-	ci = commit
-	co = checkout
-	br = branch
-	wc = log --stat
-	graph = log --graph --oneline --decorate
-	unadd = reset HEAD
-  svnci = svn dcommit
-  svnup = svn rebase
+    st = status
+    ci = commit
+    co = checkout
+    br = branch
+
+    unadd = reset HEAD
+
+    wc = log --stat
+    graph = log --graph --oneline --decorate
+
+    svnci = svn dcommit
+    svnup = svn rebase
+
 [color]
-	ui = true
+    ui = true
+
 [log]
-	abbrevCommit = true
+    abbrevCommit = true
 
 [pager]
-	stash = false
+    stash = false
+
 [user]
-	name = toro2k
-	email = toro2k@gmail.com
+    name = toro2k
+    email = toro2k@gmail.com
+
+[push]
+    default = simple
