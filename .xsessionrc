@@ -1,7 +1,4 @@
-. ~/.bash_profile
+. ~/.profile
 
 # key <> to compose keys
 setxkbmap -option compose:102
-
-guess_video_output.sh
-

@@ -21,6 +21,14 @@ shopt -s globstar
 
 # Environment
 
+if [ -d "$HOME/.rbenv/bin" ]; then
+    PATH="$HOME/.rbenv/bin:$PATH"
+fi
+
+if [ -d "$HOME/.cabal.bin" ]; then
+    PATH="$HOME/.cabal/bin:$PATH"
+fi
+
 export PAGER=less
 
 export VISUAL=vi
@@ -82,8 +90,12 @@ alias apt-unstable="aptitude versions \
 
 # Load scripts
 
-test -r /etc/bash_completion && source /etc/bash_completion
+if [ -r /etc/bash_completion -a -z "$BASH_COMPLETION_COMPAT_DIR" ]; then
+    source /etc/bash_completion
+fi
+
 command_exists rbenv && eval "$(rbenv init -)"
+
 
 
 # Temp
