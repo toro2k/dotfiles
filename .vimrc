@@ -39,6 +39,7 @@ map 0 ^
 map Y y$
 
 map <leader>ba :edit #<cr>
+map <leader>bd :bdelete<cr>
 map <leader>hh :set hlsearch! hlsearch?<cr>
 
 
