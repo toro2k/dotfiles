@@ -1,4 +1,4 @@
-. ~/.profile
+[ -r "$HOME/.profile" ] && . "$HOME/.profile"
 
 # key <> to compose keys
-setxkbmap -option compose:102
+[ -x "$(which setxkbmap)" ] && setxkbmap -option compose:102

@@ -21,13 +21,8 @@ shopt -s globstar
 
 # Environment
 
-if [ -d "$HOME/.rbenv/bin" ]; then
-    PATH="$HOME/.rbenv/bin:$PATH"
-fi
-
-if [ -d "$HOME/.cabal.bin" ]; then
-    PATH="$HOME/.cabal/bin:$PATH"
-fi
+[ -d "$HOME/.rbenv/bin" ] && PATH="$HOME/.rbenv/bin:$PATH"
+[ -d "$HOME/.cabal/bin" ] && PATH="$HOME/.cabal/bin:$PATH"
 
 export PAGER=less
 
