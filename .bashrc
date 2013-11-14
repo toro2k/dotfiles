@@ -1,14 +1,22 @@
 # Functions
 
-vibash() {
-  vi -n + $HOME/.bashrc
-  source $HOME/.bashrc
+function vibash() {
+  vi -n + "$HOME/.bashrc"
+  source "$HOME/.bashrc"
 }
 
-command_exists() {
+function command_exists() {
     command -v "$1" 2>&1 > /dev/null
 }
 
+function bak() {
+    path="${1%/}"
+    if [ -z "$path" ]; then
+        return 1
+    else
+        mv "$path" "$path~"
+    fi
+}
 
 # Shell options
 
@@ -52,13 +60,13 @@ GREP_OPTIONS+=" --exclude-dir=.git"
 export GREP_OPTIONS
 
 export LESS='-i -R -g'
-export LESS_TERMCAP_mb=$'\E[01;31m'
-export LESS_TERMCAP_md=$'\E[01;31m'
-export LESS_TERMCAP_me=$'\E[0m'
-export LESS_TERMCAP_se=$'\E[0m'
-export LESS_TERMCAP_so=$'\E[01;44;33m'
-export LESS_TERMCAP_ue=$'\E[0m'
-export LESS_TERMCAP_us=$'\E[01;32m'
+export LESS_TERMCAP_mb=$'\e[01;34m'
+export LESS_TERMCAP_md=$'\e[01;34m'
+export LESS_TERMCAP_me=$'\e[0m'
+export LESS_TERMCAP_se=$'\e[0m'
+export LESS_TERMCAP_so=$'\e[01;44;33m'
+export LESS_TERMCAP_ue=$'\e[0m'
+export LESS_TERMCAP_us=$'\e[01;33m'
 
 
 # Aliaes
@@ -83,7 +91,7 @@ alias apt-unstable="aptitude versions \
     '~VCURRENT ~Aunstable !~Atesting' --group-by=none"
 
 
-# Load scripts
+# Load things
 
 if [ -r /etc/bash_completion -a -z "$BASH_COMPLETION_COMPAT_DIR" ]; then
     source /etc/bash_completion
