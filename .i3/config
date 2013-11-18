@@ -12,7 +12,8 @@ bar {
 set $mod Mod4
 floating_modifier $mod
 
-bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+Return exec x-terminal-emulator
+bindsym $mod+space exec gmrun
 
 bindsym $mod+Shift+Q kill
 
@@ -38,10 +39,10 @@ bindsym $mod+w layout tabbed
 bindsym $mod+e layout default
 
 bindsym $mod+Shift+space floating toggle
-bindsym $mod+space focus mode_toggle
+# bindsym $mod+space focus mode_toggle
 
 bindsym $mod+a focus parent
-#bindcode $mod+d focus child
+# bindcode $mod+d focus child
 
 bindsym $mod+1 workspace 1
 bindsym $mod+2 workspace 2
