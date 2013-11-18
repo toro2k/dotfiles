@@ -1,0 +1,3 @@
+#!/bin/sh
+
+vimdiff -R "$6" "$7"

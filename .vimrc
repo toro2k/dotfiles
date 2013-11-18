@@ -38,6 +38,11 @@ map k gk
 map 0 ^
 map Y y$
 
+if &diff
+    map dq :qall<cr>
+    syntax off
+endif
+
 map <leader>ba :edit #<cr>
 map <leader>bd :bdelete<cr>
 map <leader>hh :set hlsearch! hlsearch?<cr>
