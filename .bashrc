@@ -84,7 +84,8 @@ alias lla="ll -A"
 command_exists ack-grep && alias ack="ack-grep"
 alias grep="grep --color"
 
-alias apt-mine="aptitude search '~i !~M !(~prequired|~pimportant)'"
+alias apt-mine="aptitude search '~i !~M !(~prequired|~pimportant)!~sdoc'"
+alias apt-doc="aptitude search '~i~sdoc'"
 alias apt-unneeded="aptitude search '~i ~M !~RDepends:~i'"
 alias apt-unstable="aptitude versions \
     '~VCURRENT ~Aunstable !~Atesting' --group-by=none"
