@@ -30,6 +30,7 @@ shopt -s globstar
 # Environment
 
 [ -d "$HOME/.rbenv/bin" ] && PATH="$HOME/.rbenv/bin:$PATH"
+[ -d "$HOME/.pyenv/bin" ] && PATH="$HOME/.pyenv/bin:$PATH"
 [ -d "$HOME/.cabal/bin" ] && PATH="$HOME/.cabal/bin:$PATH"
 
 export PAGER=less
@@ -98,6 +99,7 @@ if [ -r /etc/bash_completion -a -z "$BASH_COMPLETION_COMPAT_DIR" ]; then
 fi
 
 command_exists rbenv && eval "$(rbenv init -)"
+command_exists pyenv && eval "$(pyenv init -)"
 
 
 

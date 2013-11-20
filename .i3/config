@@ -17,8 +17,6 @@ bindsym $mod+space exec gmrun
 
 bindsym $mod+Shift+Q kill
 
-bindsym $mod+d exec gmrun
-
 bindsym $mod+h focus left
 bindsym $mod+j focus down
 bindsym $mod+k focus up
