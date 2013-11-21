@@ -37,7 +37,6 @@ export PAGER=less
 
 export VISUAL=vi
 export EDITOR=vi
-export PSQL_EDITOR='emacs -nw'
 
 if [ -z $SSH_TTY ]; then
   export PS1='\n\w \[\e[1;32m\]\$\$\[\e[0m\] '
