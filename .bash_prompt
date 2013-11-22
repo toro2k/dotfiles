@@ -17,12 +17,16 @@ function is_git_repo() {
 
 function git_prompt() {
     branch=$(git branch | grep '^*' | awk '{print $2}')
-    echo -n "| git: ${branch} "
+    echo -n "git: ${branch} "
 
     if [ -z "$(git status --porcelain)" ]; then
         echo -n ''
+
+    # TODO: not sure about this condition
+    elif git status --porcelain | grep -q '^[MARCD]'; then
+        echo -n '(staged changes)'
     else
-        echo -n '(changes to commit)'
+        echo -n '(unstaged changes)'
     fi
 }
 
@@ -31,7 +35,7 @@ function is_svn_repo() {
 }
 
 function svn_prompt() {
-    echo -n '| svn: '
+    echo -n 'svn: '
     if [ -z "$(svn status)" ]; then
         echo -n 'nothing to commit'
     else
@@ -42,7 +46,7 @@ function svn_prompt() {
 
 
 if [ -z $SSH_TTY ]; then
-    PS1="\n${on_purple}[\h] \w \$(scm_prompt) ${reset_color}\n\$ "
+    PS1="\n${on_purple}[\w] \$(scm_prompt) ${reset_color}\n\$ "
 else
     PS1='\n[\h] \w \[\e[1;33m\]\$\$\[\e[0m\] '
 fi
