@@ -1,0 +1,59 @@
+PROMPT_DIRTRIM=3
+
+on_purple='\[\e[45m\]'
+reset_color='\[\e[0m\]'
+
+function scm_prompt() {
+    if command_exists git && is_git_repo; then
+        git_prompt
+    elif command_exists svn && is_svn_repo; then
+        svn_prompt
+    fi
+}
+
+function is_git_repo() {
+    git branch &> /dev/null
+}
+
+function git_prompt() {
+    branch=$(git branch | grep '^*' | awk '{print $2}')
+    echo -n "| git: ${branch} "
+
+    if [ -z "$(git status --porcelain)" ]; then
+        echo -n ''
+    else
+        echo -n '(changes to commit)'
+    fi
+}
+
+function is_svn_repo() {
+    svn info &> /dev/null
+}
+
+function svn_prompt() {
+    echo -n '| svn: '
+    if [ -z "$(svn status)" ]; then
+        echo -n 'nothing to commit'
+    else
+        echo -n 'changes to commit'
+    fi
+}
+
+
+
+if [ -z $SSH_TTY ]; then
+    PS1="\n${on_purple}[\h] \w \$(scm_prompt) ${reset_color}\n\$ "
+else
+    PS1='\n[\h] \w \[\e[1;33m\]\$\$\[\e[0m\] '
+fi
+
+if [[ $TERM == 'xterm' || $TERM =~ 'rxvt' ]]; then
+  if [ -z $SSH_TTY ]; then
+    PROMPT_COMMAND='echo -ne "\033]0;${PWD}\007"'
+  else
+    PROMPT_COMMAND='echo -ne "\033]0;[${HOSTNAME}] ${PWD}\007"'
+  fi
+fi
+
+export PS2='> '
+

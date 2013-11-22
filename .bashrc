@@ -29,6 +29,8 @@ shopt -s globstar
 
 # Environment
 
+source "$HOME/.bash_prompt"
+
 [ -d "$HOME/.rbenv/bin" ] && PATH="$HOME/.rbenv/bin:$PATH"
 [ -d "$HOME/.pyenv/bin" ] && PATH="$HOME/.pyenv/bin:$PATH"
 [ -d "$HOME/.cabal/bin" ] && PATH="$HOME/.cabal/bin:$PATH"
@@ -37,23 +39,6 @@ export PAGER=less
 
 export VISUAL=vi
 export EDITOR=vi
-
-if [ -z $SSH_TTY ]; then
-  export PS1='\n\w \[\e[1;32m\]\$\$\[\e[0m\] '
-else
-  export PS1='\n[\h] \w \[\e[1;33m\]\$\$\[\e[0m\] '
-fi
-
-if [[ $TERM == 'xterm' || $TERM =~ 'rxvt' ]]; then
-  if [ -z $SSH_TTY ]; then
-    export PROMPT_COMMAND='echo -ne "\033]0;${PWD}\007"'
-  else
-    export PROMPT_COMMAND='echo -ne "\033]0;[${HOSTNAME}] ${PWD}\007"'
-  fi
-fi
-
-export PS2='> '
-export PROMPT_DIRTRIM=2
 
 GREP_OPTIONS+=" --exclude-dir=.svn"
 GREP_OPTIONS+=" --exclude-dir=.git"
