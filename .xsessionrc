@@ -1,7 +1,6 @@
-. ~/.bash_profile
+[ -r "$HOME/.profile" ] && . "$HOME/.profile"
 
 # key <> to compose keys
-setxkbmap -option compose:102
+[ -x "$(which setxkbmap)" ] && setxkbmap -option compose:102
 
-guess_video_output.sh
-
+[ -x "$(which guess_video_output.sh)" ] && guess_video_output.sh
