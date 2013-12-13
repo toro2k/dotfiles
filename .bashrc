@@ -88,3 +88,4 @@ command_exists rbenv && eval "$(rbenv init -)"
 
 # Temp
 
+alias cal="ncal -bM"
