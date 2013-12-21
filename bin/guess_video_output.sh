@@ -2,7 +2,7 @@
 
 xrandr=$(which xrandr)
 
-[ -x "$xranrd" ] || exit 1
+[ -x "$xrandr" ] || exit 1
 
 $xrandr --output LVDS1 --auto --primary
 
