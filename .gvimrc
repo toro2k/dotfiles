@@ -3,4 +3,4 @@ set go-=T         " remove tool bar
 set go-=r         " remove right scroll bar
 set go-=L         " remove left scroll bar when NERDTree is open
 
-set guifont=DejaVu\ Sans\ Mono\ 11
+set guifont=DejaVu\ Sans\ Mono\ 9
