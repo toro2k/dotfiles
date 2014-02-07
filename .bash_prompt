@@ -3,7 +3,8 @@ PROMPT_DIRTRIM=3
 on_purple='\[\e[45m\]'
 reset_color='\[\e[0m\]'
 
-function scm_prompt() {
+
+scm_prompt() {
     if command_exists git && is_git_repo; then
         git_prompt
     elif command_exists svn && is_svn_repo; then
@@ -11,31 +12,36 @@ function scm_prompt() {
     fi
 }
 
-function is_git_repo() {
+is_git_repo() {
     git branch &> /dev/null
 }
 
-function git_prompt() {
-    branch=$(git branch | grep '^*' | awk '{print $2}')
-    echo -n "git: ${branch} "
+git_prompt() {
+    echo -n "git: $(git_cur_branch_name)"
 
     git_status=$(git status --porcelain)
-    if [ -z "${git_status}" ]; then
+    if [ -z "$git_status" ]; then
         echo -n ''
 
-    # TODO: not sure about this condition
-    elif echo "${git_status}" | grep -q '^[MARCD]'; then
-        echo -n '(staged changes)'
+    # TODO: Not sure about this condition.
+    elif echo "$git_status" | grep -q '^[MARCD]'; then
+        echo -n ' (staged changes)'
     else
-        echo -n '(unstaged changes)'
+        echo -n ' (unstaged changes)'
     fi
 }
 
-function is_svn_repo() {
+# tail strips leading "* "
+# tr removes parenthesis when HEAD is detached.
+git_cur_branch_name() {
+    git branch | grep '^*' | tail -c+3 | tr -d '()'
+}
+
+is_svn_repo() {
     svn info &> /dev/null
 }
 
-function svn_prompt() {
+svn_prompt() {
     echo -n 'svn: '
     if [ -z "$(svn status)" ]; then
         echo -n 'nothing to commit'
@@ -51,14 +57,16 @@ if [ -z $SSH_TTY ]; then
 else
     PS1='\n[\h] \w \[\e[1;33m\]\$\$\[\e[0m\] '
 fi
+export PS1
 
 if [[ $TERM == 'xterm' || $TERM =~ 'rxvt' ]]; then
-  if [ -z $SSH_TTY ]; then
-    PROMPT_COMMAND='echo -ne "\033]0;${PWD}\007"'
-  else
-    PROMPT_COMMAND='echo -ne "\033]0;[${HOSTNAME}] ${PWD}\007"'
-  fi
+    if [ -z $SSH_TTY ]; then
+        PROMPT_COMMAND='echo -ne "\033]0;${PWD}\007"'
+    else
+        PROMPT_COMMAND='echo -ne "\033]0;[${HOSTNAME}] ${PWD}\007"'
+    fi
 fi
+export PROMPT_COMMAND
 
 export PS2='> '
 

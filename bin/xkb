@@ -1,0 +1,18 @@
+#!/bin/sh
+
+if [ $# -ne 1 ]; then
+    setxbmap en_US
+    exit 0
+fi
+
+case $1 in
+    en)
+        setxkbmap en_US ;;
+    it)
+        setxkbmap it ;;
+    *)
+        notify-send -t 100 "No such layout '${1}'." "Fallback on 'en'."
+        setxkbmap en_US
+        exit 0
+        ;;
+esac
