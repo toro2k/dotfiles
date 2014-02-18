@@ -1,9 +1,6 @@
 [submodule ".vim/bundle/tabular"]
 	path = .vim/bundle/tabular
 	url = git://github.com/godlygeek/tabular.git
-[submodule ".vim/bundle/nerdcommenter"]
-	path = .vim/bundle/nerdcommenter
-	url = https://github.com/scrooloose/nerdcommenter.git
 [submodule ".vim/bundle/vim-rubytest"]
 	path = .vim/bundle/vim-rubytest
 	url = https://github.com/janx/vim-rubytest.git
