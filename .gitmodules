@@ -4,9 +4,6 @@
 [submodule ".vim/bundle/vim-rubytest"]
 	path = .vim/bundle/vim-rubytest
 	url = https://github.com/janx/vim-rubytest.git
-[submodule ".vim/bundle/vim-vividchalk"]
-	path = .vim/bundle/vim-vividchalk
-	url = https://github.com/tpope/vim-vividchalk.git
 [submodule ".vim/bundle/nerdtree"]
 	path = .vim/bundle/nerdtree
 	url = https://github.com/scrooloose/nerdtree.git
