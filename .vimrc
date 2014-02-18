@@ -32,6 +32,7 @@ autocmd BufNewFile,BufRead *.spec set filetype=ruby
 
 map j gj
 map k gk
+
 map 0 ^
 map Y y$
 
@@ -43,15 +44,3 @@ endif
 map <leader>ba :edit #<cr>
 map <leader>bd :bdelete<cr>
 map <leader>hh :set hlsearch! hlsearch?<cr>
-
-
-
-" PLUGIN SPECIFIC STUFF
-" maybe are better placed in after/plugin?
-
-map <silent> <leader>dd :NERDTreeToggle<cr>
-
-" Put a space between comment characters and the
-" beginning of the commented line.
-let NERDSpaceDelims=1
-
