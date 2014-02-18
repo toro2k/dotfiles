@@ -49,7 +49,7 @@ map <leader>hh :set hlsearch! hlsearch?<cr>
 " PLUGIN SPECIFIC STUFF
 " maybe are better placed in after/plugin?
 
-map <silent> <leader>tt :NERDTreeToggle<cr>
+map <silent> <leader>dd :NERDTreeToggle<cr>
 
 " Put a space between comment characters and the
 " beginning of the commented line.
