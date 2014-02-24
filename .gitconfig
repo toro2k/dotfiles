@@ -1,5 +1,5 @@
 [core]
-    pager = less -F -X
+    pager = less -FX
 
 [alias]
     st = status
