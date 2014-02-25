@@ -27,8 +27,8 @@ set noswapfile
 
 colorscheme toro2k
 
-autocmd BufWritePre * :%s/\s\+$//e " Remove trailing spaces on save
-autocmd BufNewFile,BufRead *.spec set filetype=ruby
+" Remove trailing spaces on save from ANY file
+autocmd BufWritePre * :%s/\s\+$//e
 
 map j gj
 map k gk
