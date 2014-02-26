@@ -27,8 +27,6 @@ set noswapfile
 
 colorscheme toro2k
 
-" Remove trailing spaces on save from ANY file
-autocmd BufWritePre * :%s/\s\+$//e
 
 map j gj
 map k gk
@@ -44,3 +42,10 @@ endif
 map <leader>ba :edit #<cr>
 map <leader>bd :bdelete<cr>
 map <leader>hh :set hlsearch! hlsearch?<cr>
+
+
+" Remove trailing spaces on save from ANY file
+autocmd BufWritePre * %s/\s\+$//e
+
+" Turn on sql ftplugin when edit files from MySQL client
+autocmd BufRead /tmp/sql* setfiletype sql
