@@ -1,0 +1,16 @@
+#!/bin/sh
+
+repo_url=`awk '/^deb / { print $2 }' /etc/apt/sources.list`
+mirror_host=`echo ${repo_url} | awk -F/ '{ print $3 }'`
+
+log() {
+    logger --tag "auto-aptitude-update"  "$1"
+}
+
+host $mirror_host > /dev/null || {
+    log "Host unreachable: ${mirror_host}"
+    exit 1
+}
+
+aptitude update
+log "Update successfull from: ${mirror_host}"
