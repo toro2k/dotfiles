@@ -39,8 +39,8 @@ if &diff
     syntax off
 endif
 
-map <leader>ba :edit #<cr>
-map <leader>bd :bdelete<cr>
+map <silent> <leader>ba :edit #<cr>
+map <silent> <leader>bd :bdelete<cr>
 map <leader>hh :set hlsearch! hlsearch?<cr>
 
 
@@ -49,3 +49,5 @@ autocmd BufWritePre * %s/\s\+$//e
 
 " Turn on sql ftplugin when edit files from MySQL client
 autocmd BufRead /tmp/sql* setfiletype sql
+
+autocmd BufRead *quickfix* setlocal nowrap
