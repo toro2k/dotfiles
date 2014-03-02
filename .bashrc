@@ -83,6 +83,7 @@ alias apt-unreq="aptitude search '~i ~M !~RDepends:~i'"
 # Load things
 
 test -r /etc/bash_completion && source /etc/bash_completion
+test -r $HOME/.bashmarks.sh && source $HOME/.bashmarks.sh
 command_exists rbenv && eval "$(rbenv init -)"
 command_exists pyenv && eval "$(pyenv init -)"
 
