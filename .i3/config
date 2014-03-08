@@ -72,3 +72,7 @@ bindsym $mod+Control+l move workspace to output right
 bindsym $mod+Shift+C reload
 bindsym $mod+Shift+R restart
 bindsym $mod+Shift+E exit
+
+bindsym XF86AudioRaiseVolume exec i3-volume up
+bindsym XF86AudioLowerVolume exec i3-volume down
+bindsym XF86AudioMute exec i3-volume toggle
