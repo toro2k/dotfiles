@@ -76,3 +76,9 @@ bindsym $mod+Shift+E exit
 bindsym XF86AudioRaiseVolume exec i3-volume up
 bindsym XF86AudioLowerVolume exec i3-volume down
 bindsym XF86AudioMute exec i3-volume toggle
+
+bindsym XF86AudioPlay exec audacious --play-pause
+bindsym XF86AudioPrev exec audacious --rew
+bindsym XF86AudioNext exec audacious --fwd
+
+bindsym Scroll_Lock exec i3lock -c2e3436
