@@ -40,6 +40,7 @@ source "$HOME/.bash_prompt"
 [ -d "$HOME/.cabal/bin" ] && PATH="$HOME/.cabal/bin:$PATH"
 
 export PAGER=less
+export ACK_PAGER=less
 
 export VISUAL=vi
 export EDITOR=vi
@@ -76,9 +77,8 @@ alias lla="ll -A"
 alias grep="grep --color"
 command_exists ack-grep && alias ack="ack-grep"
 
-alias apt-mine="aptitude search '~i !~M !(~prequired|~pimportant)'"
+alias apt-mine="aptitude search '~i !~M !(~prequired|~pimportant)' | less"
 alias apt-unreq="aptitude search '~i ~M !~RDepends:~i'"
-
 
 # Load things
 
