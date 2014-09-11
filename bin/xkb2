@@ -1,0 +1,57 @@
+#!/usr/bin/python
+
+from __future__ import print_function
+
+from subprocess import Popen, PIPE
+from os import system, path
+from sys import argv, stderr
+
+
+command = '/usr/bin/setxkbmap'
+layouts = ['us', 'it']
+
+
+def current_layout():
+    for line in Popen([command, '-query'], stdout=PIPE).stdout:
+        if line.startswith(b'layout:'):
+            _, layout = line.split()
+            return layout.decode()
+
+def next_layout(layouts, current):
+    current_index = layouts.index(current)
+    next_index = (current_index + 1) % len(layouts)
+    return layouts[next_index]
+
+def set_layout(layout):
+    system('{} {}'.format(command, layout))
+
+def cycle_layout():
+    layout = next_layout(layouts, current_layout())
+    set_layout(layout)
+    system('killall -USR1 i3status')
+
+def print_layouts():
+    for l in layouts:
+        print(l, end='')
+        if l == current_layout():
+            print(' *')
+        else:
+            print()
+
+def print_usage():
+    print("USAGE: xkb2 [ -q | -l | LAYOUT ]", file=stderr)
+
+
+if __name__ == '__main__':
+    if len(argv) == 1:
+        cycle_layout()
+    else:
+        if argv[1] in layouts:
+            set_layout(argv[1])
+        elif argv[1] == '-q':
+            print(current_layout())
+        elif argv[1] == '-l':
+            print_layouts()
+        else:
+            print_usage()
+            exit(1)
