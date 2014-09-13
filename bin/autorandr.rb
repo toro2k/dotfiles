@@ -13,30 +13,48 @@ def split_mode(mode_str)
   mode_str.scan(/(\d+)x(\d+)/).flatten.map(&:to_i)
 end
 
+
+def parse_connected_output(line)
+  tokens = line.split(nil, 4)
+
+  output = {}
+  output[:name] = tokens[0]
+  output[:modes] = []
+
+  if tokens[2] == 'primary'
+    output[:on] = true
+    output[:primary] = true
+    output[:mode] = split_mode(tokens[3])
+  elsif tokens[2] =~ /\A[1-9]/
+    output[:on] = true
+    output[:primary] = false
+    output[:mode] = split_mode(tokens[2])
+  else
+    output[:on] = false
+  end
+
+  output
+end
+
+def parse_mode_line(line)
+  mode_str, _ = line.split(nil, 2)
+  split_mode(mode_str)
+end
+
 def parse_xrandr_query
   IO.popen(XRANDR).each.with_object([]) do |line, outputs|
     case line
-    when /\AScreen/
-      # header
+    when /\AScreen/ # header
       next
-
-    when /\A[A-Z]/
-      # output line
-      output_name, _, mode_str = line.split($;, 3)
-      outputs << {
-        name: output_name,
-        mode: split_mode(mode_str),
-        modes: []
-      }
-
-    else
-      # mode line
-      mode_str, _ = line.split($;, 2)
-      outputs.last[:modes] << split_mode(mode_str)
-
+    when /\A[A-Z]/ # output line
+      next if line.include?('disconnected')
+      outputs << parse_connected_output(line)
+    else # mode line
+      outputs.last[:modes] << parse_mode_line(line)
     end
   end
 end
+
 
 def command_options_for(output, args)
   options = []
@@ -76,13 +94,15 @@ end
 
 def print_outputs(outputs)
   outputs.each do |out|
-    puts out[:name]
+    puts out[:on] ? "[#{out[:name]}]" : out[:name]
+
     out[:modes].each do |mode|
       mode == out[:mode] ? print('* ') : print('  ')
       puts mode.join('x')
     end
   end
 end
+
 
 def read_config(config_path)
   if config_path.readable?
