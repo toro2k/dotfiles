@@ -2,5 +2,3 @@
 
 # key <> to compose keys
 [ -x "$(which setxkbmap)" ] && setxkbmap -option compose:102
-
-[ -x "$(which setup_video_output)" ] && setup_video_output
