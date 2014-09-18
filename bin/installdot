@@ -1,0 +1,23 @@
+#!/usr/bin/ruby -w
+
+require 'pathname'
+
+abort('USAGE: installdot DOTFILE') unless ARGV[0]
+
+
+home_dir = Pathname.new('~').expand_path
+dotfile_name = Pathname.new(ARGV[0])
+
+link_name = home_dir.join(dotfile_name)
+
+if link_name.symlink?
+  exit # Already installed, silently ignored.
+
+elsif link_name.exist?
+  abort("#{link_name} already exists and it isn't a symlink")
+
+else
+  target = home_dir.join('dotfiles', dotfile_name)
+  link_name.make_symlink(target)
+end
+
