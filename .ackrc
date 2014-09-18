@@ -1,0 +1,6 @@
+--smart-case
+--follow
+
+--ignore-dir=log
+--ignore-dir=doc
+--ignore-dir=tmp
