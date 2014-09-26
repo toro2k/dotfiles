@@ -1,1 +1,3 @@
-*.elc
+.Xresources
+.gvimrc
+.i3/config

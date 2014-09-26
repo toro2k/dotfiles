@@ -12,3 +12,5 @@ IRB.conf[:PROMPT][:VERSION] = {
   :RETURN   => "# => %s\n"
 }
 IRB.conf[:PROMPT_MODE] = :VERSION
+
+IRB.conf[:LOAD_MODULES] = %w[ pp ]

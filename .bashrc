@@ -1,15 +1,15 @@
+# Don't do anything if not an interactive shell.
+[ -z "$PS1" ] && return
+
+
 # Functions
 
-function vibash() {
+vibash() {
   vi -n + "$HOME/.bashrc"
   source "$HOME/.bashrc"
 }
 
-function command_exists() {
-    command -v "$1" 2>&1 > /dev/null
-}
-
-function bak() {
+bak() {
     path="${1%/}"
     if [ -z "$path" ]; then
         return 1
@@ -18,9 +18,13 @@ function bak() {
     fi
 }
 
+command_exists() {
+    command -v "$1" 2>&1 > /dev/null
+}
+
+
 # Shell options
 
-shopt -s -o noclobber
 shopt -s cdspell
 shopt -s extglob
 shopt -s no_empty_cmd_completion
@@ -36,6 +40,7 @@ source "$HOME/.bash_prompt"
 [ -d "$HOME/.cabal/bin" ] && PATH="$HOME/.cabal/bin:$PATH"
 
 export PAGER=less
+export ACK_PAGER=less
 
 export VISUAL=vi
 export EDITOR=vi
@@ -44,7 +49,7 @@ GREP_OPTIONS+=" --exclude-dir=.svn"
 GREP_OPTIONS+=" --exclude-dir=.git"
 export GREP_OPTIONS
 
-export LESS='-i -R -g'
+export LESS='-i -R -g -FX'
 export LESS_TERMCAP_mb=$'\e[01;34m'
 export LESS_TERMCAP_md=$'\e[01;34m'
 export LESS_TERMCAP_me=$'\e[0m'
@@ -69,25 +74,18 @@ alias ll="ls -lh"
 alias la="ls -A"
 alias lla="ll -A"
 
-command_exists ack-grep && alias ack="ack-grep"
 alias grep="grep --color"
+command_exists ack-grep && alias ack="ack-grep"
 
-alias apt-mine="aptitude search '~i !~M !(~prequired|~pimportant)!~sdoc'"
-alias apt-doc="aptitude search '~i~sdoc'"
-alias apt-unneeded="aptitude search '~i ~M !~RDepends:~i'"
-alias apt-unstable="aptitude versions \
-    '~VCURRENT ~Aunstable !~Atesting' --group-by=none"
-
+alias apt-mine="aptitude search '~i !~M !(~prequired|~pimportant)' | less"
+alias apt-unreq="aptitude search '~i ~M !~RDepends:~i'"
 
 # Load things
 
-if [ -r /etc/bash_completion -a -z "$BASH_COMPLETION_COMPAT_DIR" ]; then
-    source /etc/bash_completion
-fi
-
+test -r /etc/bash_completion && source /etc/bash_completion
+test -r $HOME/.bashmarks.sh && source $HOME/.bashmarks.sh
 command_exists rbenv && eval "$(rbenv init -)"
 command_exists pyenv && eval "$(pyenv init -)"
-
 
 
 # Temp

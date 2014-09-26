@@ -1,0 +1,11 @@
+#!/bin/sh
+
+[ -x $(which netselect-apt) ] || {
+    echo "netselect-apt is required for this to work" 2>&1
+    exit 1
+}
+
+netselect-apt sid \
+    --outfile /etc/apt/sources.list \
+    --arch amd64 --country it \
+    --ftp --nonfree

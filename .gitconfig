@@ -1,3 +1,6 @@
+[core]
+    pager = less -FX
+
 [alias]
     st = status
     ci = commit
