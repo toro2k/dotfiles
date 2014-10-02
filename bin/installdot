@@ -2,11 +2,12 @@
 
 require 'pathname'
 
-abort('USAGE: installdot DOTFILE') unless ARGV[0]
+abort('USAGE: installdot [-f] DOTFILE') unless ARGV.last
 
+force = ARGV.first == '-f'
 
 home_dir = Pathname.new('~').expand_path
-dotfile_name = Pathname.new(ARGV[0])
+dotfile_name = Pathname.new(ARGV.last)
 
 link_name = home_dir.join(dotfile_name)
 target = home_dir.join('dotfiles', dotfile_name)
@@ -15,17 +16,15 @@ unless target.exist?
   abort("#{target} doen't exist")
 end
 
-if link_name.symlink?
-  if link_name.readlink == target
-    exit # Already installed, silently ignored.
+if link_name.symlink? && link_name.readlink == target
+  exit # Already installed, silently ignored.
+
+elsif link_name.exist? || link_name.symlink? # may be a broken link
+  if force
+    link_name.delete
   else
-    abort("#{link_name} is a symlink to #{link_name.readlink}")
+    abort("#{link_name} already exists")
   end
-
-elsif link_name.exist?
-  abort("#{link_name} already exists and it isn't a symlink")
-
-else
-  link_name.make_symlink(target)
 end
 
+link_name.make_symlink(target)
