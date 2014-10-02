@@ -11,6 +11,10 @@ dotfile_name = Pathname.new(ARGV[0])
 link_name = home_dir.join(dotfile_name)
 target = home_dir.join('dotfiles', dotfile_name)
 
+unless target.exist?
+  abort("#{target} doen't exist")
+end
+
 if link_name.symlink?
   if link_name.readlink == target
     exit # Already installed, silently ignored.
