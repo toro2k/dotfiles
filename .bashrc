@@ -90,3 +90,4 @@ command_exists pyenv && eval "$(pyenv init -)"
 
 # Temp
 
+alias cal="ncal -bM"
