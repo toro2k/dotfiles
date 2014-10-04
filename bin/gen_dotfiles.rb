@@ -35,5 +35,5 @@ end
 template_paths.each do |path|
   result = ERB.new(path.read).result
   output_path = path.dirname.join(path.basename('.erb'))
-  output_path.write(result)
+  output_path.open('w') { |f| f.write(result) }
 end
