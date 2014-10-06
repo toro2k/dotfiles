@@ -1,30 +1,44 @@
-#!/usr/bin/ruby -w
+#!/usr/bin/env ruby
 
 require 'pathname'
 
-abort('USAGE: installdot [-f] DOTFILE') unless ARGV.last
 
-force = ARGV.first == '-f'
+def install_dot(target, link_name, options = {})
+  unless target.exist?
+    warn("#{target} doen't exist")
+    return
+  end
+
+  if link_name.symlink? && link_name.readlink == target
+    return # Already installed, silently ignored.
+
+  elsif link_name.exist? || link_name.symlink? # may be a broken link
+    if options[:force]
+      link_name.delete
+    else
+      warn("#{link_name} already exists")
+      return
+    end
+  end
+
+  link_name.make_symlink(target)
+end
+
+
+abort('USAGE: installdot [-f] DOTFILE ...') unless ARGV.last
+
+force = false
+if ARGV.first == '-f'
+  force = true
+  ARGV.shift
+end
 
 home_dir = Pathname.new('~').expand_path
-dotfile_name = Pathname.new(ARGV.last)
+dotfile_names = ARGV.map { |a| Pathname.new(a) }
 
-link_name = home_dir.join(dotfile_name)
-target = home_dir.join('dotfiles', dotfile_name)
-
-unless target.exist?
-  abort("#{target} doen't exist")
+dotfile_names.each do |name|
+  target = home_dir.join('dotfiles', name)
+  link_name = home_dir.join(name)
+  install_dot(target, link_name, force: force)
 end
 
-if link_name.symlink? && link_name.readlink == target
-  exit # Already installed, silently ignored.
-
-elsif link_name.exist? || link_name.symlink? # may be a broken link
-  if force
-    link_name.delete
-  else
-    abort("#{link_name} already exists")
-  end
-end
-
-link_name.make_symlink(target)
