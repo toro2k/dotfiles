@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby
 
 require 'pathname'
+require 'optparse'
 
 
 def install_dot(target, link_name, options = {})
@@ -24,14 +25,19 @@ def install_dot(target, link_name, options = {})
   link_name.make_symlink(target)
 end
 
-
-abort('USAGE: installdot [-f] DOTFILE ...') unless ARGV.last
-
-force = false
-if ARGV.first == '-f'
-  force = true
-  ARGV.shift
+def parse_options
+  options = {}
+  parser = OptionParser.new do |opts|
+    opts.banner = "Usage: #{opts.program_name} [-f] DOTFILE ..."
+    opts.on('-f', 'Force install') { options[:force] = true }
+  end
+  parser.parse!
+  options
 end
+
+
+options = parse_options
+abort('missing dotfile') if ARGV.empty?
 
 home_dir = Pathname.new('~').expand_path
 dotfile_names = ARGV.map { |a| Pathname.new(a) }
@@ -39,6 +45,6 @@ dotfile_names = ARGV.map { |a| Pathname.new(a) }
 dotfile_names.each do |name|
   target = home_dir.join('dotfiles', name)
   link_name = home_dir.join(name)
-  install_dot(target, link_name, force: force)
+  install_dot(target, link_name, options)
 end
 
