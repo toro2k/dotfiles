@@ -7,3 +7,5 @@ hi DiffDelete ctermbg=0  ctermfg=8
 hi DiffText   ctermbg=5
 
 hi Comment guifg=#ad7fa8 ctermfg=Magenta
+
+hi ColorColumn guibg=#555753 ctermbg=darkgrey

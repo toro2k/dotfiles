@@ -27,6 +27,8 @@ set noswapfile
 
 set clipboard=unnamedplus,exclude:cons\|linux
 
+set colorcolumn=80
+
 colorscheme toro2k
 
 noremap j gj
