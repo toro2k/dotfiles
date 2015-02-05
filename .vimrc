@@ -1,5 +1,9 @@
 execute pathogen#infect()
 
+if filereadable(expand("~/.vim/typos.vim"))
+    source ~/.vim/typos.vim
+endif
+
 syntax on
 filetype plugin indent on
 
@@ -17,35 +21,38 @@ set ignorecase
 set smartcase
 set hlsearch
 
-set tildeop
-
 set nobackup
 set nowritebackup
 set noswapfile
 
+set clipboard=unnamedplus,exclude:cons\|linux
+
 colorscheme toro2k
 
+noremap j gj
+noremap k gk
 
-map j gj
-map k gk
+noremap H ^
+noremap L $
 
-map 0 ^
-map Y y$
+noremap Y y$
+
+" Uppercase the word under cursor in insert mode
+inoremap <c-u> <esc>viwUea
 
 if &diff
-    map dq :qall<cr>
+    noremap dq :qall<cr>
     syntax off
 endif
 
-map <silent> <leader>ba :edit #<cr>
-map <silent> <leader>bd :bdelete<cr>
-map <leader>hh :set hlsearch! hlsearch?<cr>
+noremap <silent> <leader>ba :edit #<cr>
+noremap <silent> <leader>bd :bdelete<cr>
+noremap <leader>hh :set hlsearch! hlsearch?<cr>
 
+noremap <leader>ev :split + $MYVIMRC<cr>
+noremap <leader>sv :source $MYVIMRC<cr>
 
 " Remove trailing spaces on save from ANY file
 autocmd BufWritePre * %s/\s\+$//e
-
 " Turn on sql ftplugin when edit files from MySQL client
 autocmd BufRead /tmp/sql* setfiletype sql
-
-autocmd BufRead *quickfix* setlocal nowrap

@@ -1,4 +1,4 @@
-map <silent> <leader>ee :Errors<cr>
+noremap <silent> <leader>ee :Errors<cr>
 
 " C++
 let g:syntastic_cpp_compiler = "clang++"
