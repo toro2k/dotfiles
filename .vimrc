@@ -42,6 +42,9 @@ noremap Y y$
 " Uppercase the word under cursor in insert mode
 inoremap <c-u> <esc>viwUea
 
+noremap Q <nop>
+noremap q: <nop>
+
 if &diff
     noremap dq :qall<cr>
     syntax off
@@ -54,7 +57,10 @@ noremap <leader>hh :set hlsearch! hlsearch?<cr>
 noremap <leader>ev :split + $MYVIMRC<cr>
 noremap <leader>sv :source $MYVIMRC<cr>
 
-" Remove trailing spaces on save from ANY file
-autocmd BufWritePre * %s/\s\+$//e
-" Turn on sql ftplugin when edit files from MySQL client
-autocmd BufRead /tmp/sql* setfiletype sql
+augroup misc
+    autocmd!
+    " Remove trailing spaces on save from ANY file
+    autocmd BufWritePre * %s/\s\+$//e
+    " Turn on sql ftplugin when edit files from MySQL client
+    autocmd BufRead /tmp/sql* setfiletype sql
+augroup END
