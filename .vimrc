@@ -25,6 +25,8 @@ set nobackup
 set nowritebackup
 set noswapfile
 
+set wildmode=list:longest,full
+
 set clipboard=unnamedplus,exclude:cons\|linux
 
 set colorcolumn=80
