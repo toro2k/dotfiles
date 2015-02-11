@@ -44,6 +44,9 @@ noremap Y y$
 " Uppercase the word under cursor in insert mode
 inoremap <c-u> <esc>viwUea
 
+" Clear current line
+noremap <leader>cc cc<esc>
+
 noremap Q <nop>
 noremap q: <nop>
 
@@ -65,4 +68,24 @@ augroup misc
     autocmd BufWritePre * %s/\s\+$//e
     " Turn on sql ftplugin when edit files from MySQL client
     autocmd BufRead /tmp/sql* setfiletype sql
+
+    autocmd BufWriteCmd *
+                \ call CreateDirectoryAskConfirmation(expand("<afile>:p:h"))
 augroup END
+
+function! CreateDirectoryAskConfirmation(path)
+    if isdirectory(a:path)
+        write
+        return
+    endif
+
+    echohl Question
+    echo "Directory " . a:path . " is missing. Create it?"
+    echohl None
+
+    let response = nr2char(getchar())
+    if response ==? "y"
+        call mkdir(a:path, "p")
+        write
+    endif
+endfunction
