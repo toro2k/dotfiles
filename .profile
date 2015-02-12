@@ -22,13 +22,4 @@ GREP_OPTIONS+=" --exclude-dir=.svn"
 GREP_OPTIONS+=" --exclude-dir=.git"
 export GREP_OPTIONS
 
-export LESS='-i -R -g -FX'
-export LESS_TERMCAP_mb=$'\e[01;34m'
-export LESS_TERMCAP_md=$'\e[01;34m'
-export LESS_TERMCAP_me=$'\e[0m'
-export LESS_TERMCAP_se=$'\e[0m'
-export LESS_TERMCAP_so=$'\e[01;44;33m'
-export LESS_TERMCAP_ue=$'\e[0m'
-export LESS_TERMCAP_us=$'\e[01;33m'
-
 [ -f "$HOME/.profile_site" ] && source "$HOME/.profile_site"

@@ -57,8 +57,8 @@ if [ -z $SSH_TTY ]; then
 else
     PS1='\n[\h] \w ${YELLOW}\$\$ ${RESET_COLOR}'
 fi
-export PS1
-export PS2='> '
+
+PS2='> '
 
 if [[ $TERM == 'xterm' || $TERM =~ 'rxvt' ]]; then
     if [ -z $SSH_TTY ]; then
@@ -67,6 +67,5 @@ if [[ $TERM == 'xterm' || $TERM =~ 'rxvt' ]]; then
         PROMPT_COMMAND='echo -ne "\033]0;[${HOSTNAME}] ${PWD}\007"'
     fi
 fi
-export PROMPT_COMMAND
 
 
