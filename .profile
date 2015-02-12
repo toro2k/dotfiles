@@ -1,4 +1,3 @@
-
 if [ -n "$BASH_VERSION" -a -r "$HOME/.bashrc" ]; then
     . "$HOME/.bashrc"
 fi
@@ -22,4 +21,4 @@ GREP_OPTIONS+=" --exclude-dir=.svn"
 GREP_OPTIONS+=" --exclude-dir=.git"
 export GREP_OPTIONS
 
-[ -f "$HOME/.profile_site" ] && source "$HOME/.profile_site"
+[ -r "$HOME/.profile_site" ] && . "$HOME/.profile_site"
