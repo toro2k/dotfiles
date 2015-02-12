@@ -34,33 +34,10 @@ shopt -s globstar
 # Environment
 
 source "$HOME/.bash_prompt"
-
-[ -d "$HOME/.rbenv/bin" ] && PATH="$HOME/.rbenv/bin:$PATH"
-[ -d "$HOME/.pyenv/bin" ] && PATH="$HOME/.pyenv/bin:$PATH"
-[ -d "$HOME/.cabal/bin" ] && PATH="$HOME/.cabal/bin:$PATH"
-
-export PAGER=less
-export ACK_PAGER=less
-
-export VISUAL=vi
-export EDITOR=vi
-
-GREP_OPTIONS+=" --exclude-dir=.svn"
-GREP_OPTIONS+=" --exclude-dir=.git"
-export GREP_OPTIONS
-
-export LESS='-i -R -g -FX'
-export LESS_TERMCAP_mb=$'\e[01;34m'
-export LESS_TERMCAP_md=$'\e[01;34m'
-export LESS_TERMCAP_me=$'\e[0m'
-export LESS_TERMCAP_se=$'\e[0m'
-export LESS_TERMCAP_so=$'\e[01;44;33m'
-export LESS_TERMCAP_ue=$'\e[0m'
-export LESS_TERMCAP_us=$'\e[01;33m'
-
 if [ -x /usr/bin/dircolors ]; then
     eval "$(dircolors -b)"
 fi
+
 
 # Aliaes
 
