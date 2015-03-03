@@ -1,61 +1,79 @@
 require 'pathname'
+require 'io/console'
+require 'pp'
+
 
 desc('install dotfiles package')
-task(:install, [:package]) do |_, args|
+task(:install, [:package] => :generate) do |_, args|
 
-  package_name = args[:package]
+  package_files = get_package_files(args[:package])
+  package_links = get_package_links(package_files)
 
-  unless package_dir_exist?(package_name)
-    abort( error("#{package_name}: no such package") )
-  end
+  package_links.zip(package_files) do |link, target|
 
-  package_files = package_files(package_name)
+    if link.exist? || link.symlink?
 
-  package_links(package_files).zip(package_files).each do |link, target|
-    if not (link.exist? || link.symlink?)
-      puts( success("#{link} -> #{target}") )
-    else
-      puts(error_message_for(link))
-      puts( warning("#{link} -> #{target}") ) if ask_to_force?
+      if link.symlink?
+        print( error("Link exists: #{link} -> #{link.readlink}") )
+      else
+        print( error("File or directory exists: #{link}") )
+      end
+
+      if ask_to_remove?
+        puts( warning("delete #{link}") )
+        if link.directory?
+          link.rmtree
+        else
+          link.delete
+        end
+      else
+        next
+      end
+
     end
+
+    link.make_symlink(target)
   end
 
 end
 
 
-def package_dir_exist?(package_name)
-  Pathname.new(package_name).directory?
+task(:generate, [:package] => :check_package) do |_, args|
+
+  # package_erbs = get_package_erbs(args[:package])
+
 end
 
-def package_files(package_name)
-  Pathname.glob( Pathname.new(package_name).realpath.join('*') )
+
+task(:check_package, [:package]) do |_, args|
+  unless Pathname(args[:package]).directory?
+    abort( error("#{args[:package]}: no such package") )
+  end
 end
 
-def package_links(package_files)
-  home_dir = Pathname.new(ENV['HOME']).realpath
+
+def get_package_files(package_name)
+  Pathname.glob( Pathname(package_name).realpath.join('*') )
+end
+
+def get_package_links(package_files)
   package_files.map do |path|
-    Pathname.new(home_dir.join(".#{path.basename}"))
+    Pathname.new(Pathname(ENV['HOME']).join(".#{path.basename}"))
   end
 end
 
+# def get_package_erbs(package_name)
+#   erbs = Pathname.glob( Pathname.new(package_name).realpath.join('**/*.erb') )
+# end
 
-def ask_to_force?
-  print("force? [y/N]")
-  $stdin.getc.downcase == 'y'
+
+def ask_to_remove?
+  print(" remove? [y/N]")
+  remove = $stdin.getch.downcase == 'y'
+  puts
+  remove
 end
 
-
-def error_message_for(link)
-  if link.exist?
-    color(:red, "File or directory exists: #{link}")
-  elsif link.symlink? && link.exist?
-    "#{error('Link exists')}: #{link} -> #{link.readlink}"
-  elsif link.symlink?
-    color(:red, "Broken link: #{link} -> #{link.readlink}")
-  else
-    puts('unknown error')
-  end
-end
 
 COLORS = {
   :red => "\e[01;31m",
@@ -75,7 +93,6 @@ end
 def error(text)
   color(:red, text)
 end
-
 
 def color(color, text)
   "#{COLORS[color]}#{text}#{COLORS[:reset]}"
