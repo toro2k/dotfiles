@@ -1,0 +1,66 @@
+#!/bin/bash
+
+SETXKBMAP='/usr/bin/setxkbmap'
+LAYOUTS=( us it )
+
+
+current_layout() {
+    $SETXKBMAP -query | awk '/layout:/ { print $2; }'
+}
+
+set_layout() {
+    $SETXKBMAP "$1"
+}
+
+cycle_layout() {
+    local current_layout=$(current_layout)
+    local next_layout_ix=0
+    local i
+    for (( i=0; i < ${#LAYOUTS[@]}; ++i )) {
+        if [ "${LAYOUTS[$i]}" = "$current_layout" ]; then
+            next_layout_ix=$(( ( $i + 1 ) % ${#LAYOUTS[@]} ))
+            break
+        fi
+    }
+    set_layout "${LAYOUTS[$next_layout_ix]}"
+}
+
+print_layouts() {
+    local current_layout=$(current_layout)
+    for layout in "${LAYOUTS[@]}"; do
+        printf "%s" $layout
+        if [ "$current_layout" = "$layout" ]; then
+            printf " *\n"
+        else
+            printf "\n"
+        fi
+    done
+}
+
+
+if [ $# -eq 0 ]; then
+    cycle_layout
+else
+
+    for layout in "${LAYOUTS[@]}"; do
+        if [ "$1" = "$layout" ]; then
+            set_layout "$1"
+            exit 0
+        fi
+    done
+
+    case "$1" in
+        '-q')
+            printf "%s\n" $(current_layout)
+            ;;
+
+        '-l')
+            print_layouts
+            ;;
+
+        *)
+            printf "USAGE: %s [ -q | -l | LAYOUT ]\n" "$0" 2>&1
+            exit 1
+            ;;
+    esac
+fi
