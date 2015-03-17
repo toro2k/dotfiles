@@ -1,31 +1,49 @@
-#!/bin/sh
+#!/bin/bash
+
+amixer='amixer --mapped-volume'
+mixer='Master'
+
 
 usage() {
     echo 'usage: volume up|down|toggle' 2>&1
     exit 1
 }
 
-[ $# -eq 1 ] || usage
+print_volume() {
+    local line="$($amixer sget $mixer | grep 'Mono:')"
+    if echo $line | grep -q '\[off\]'; then
+        echo
+    else
+        echo $line | grep -o '[[:digit:]]\+%'
+    fi
+}
 
-amixer='amixer --mapped-volume'
+
+if [ $# -eq 0 ]; then
+    print_volume
+    exit 0
+fi
 
 case $1 in
-    'up')
-        $amixer -q set Master 3%+
+    '-u')
+        $amixer -q sset Master 3%+ unmute
         ;;
 
-    'down')
-        $amixer -q set Master 3%-
+    '-d')
+        $amixer -q sset Master 3%- unmute
         ;;
 
-    'toggle')
-        $amixer -q set Master toggle
+    '-t')
+        $amixer -q sset Master toggle
         ;;
 
     *)
         usage
+        exit 1
         ;;
 esac
 
-# Refresh i3status
-killall -USR1 i3status
+# Refresh i3blocks
+pkill -RTMIN+1 i3blocks
+
+exit 0
