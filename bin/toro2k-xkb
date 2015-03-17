@@ -10,6 +10,7 @@ current_layout() {
 
 set_layout() {
     $SETXKBMAP "$1"
+    pkill -RTMIN+2 i3blocks
 }
 
 cycle_layout() {
@@ -39,7 +40,14 @@ print_layouts() {
 
 
 if [ $# -eq 0 ]; then
-    cycle_layout
+    current_layout=$(current_layout)
+    if [ "$current_layout" = 'us' ]; then
+        printf "\n"
+    else
+        printf "%s\n" $(current_layout)
+        printf "\n"
+        printf "#ff0000"
+    fi
 else
 
     for layout in "${LAYOUTS[@]}"; do
@@ -50,8 +58,8 @@ else
     done
 
     case "$1" in
-        '-q')
-            printf "%s\n" $(current_layout)
+        '-c')
+            cycle_layout
             ;;
 
         '-l')
