@@ -1,16 +1,18 @@
 #!/bin/bash
 
 amixer='amixer --mapped-volume'
-mixer="Master"
+mixer='Master'
+step='3%'
 
 
 print_volume() {
     local line="$($amixer sget $mixer | grep 'Mono:')"
-    if echo $line | grep -q '\[off\]'; then
-        # mixer is mute
-        echo
+    if grep -q '\[off\]' <<< "$line"; then
+        printf '\n'
     else
-        echo $line | grep -o '[[:digit:]]\+%'
+        grep -o '[[:digit:]]\+%' <<< "$line"
+        printf '\n'
+        printf '#ffff00'
     fi
 }
 
@@ -19,20 +21,20 @@ if [ $# -eq 0 ]; then
     print_volume
 else
     case "$1" in
-        '-u')
-            $amixer -q sset $mixer '3%+' unmute
+        'up')
+            $amixer -q sset $mixer "${step}+" unmute
             ;;
 
-        '-d')
-            $amixer -q sset $mixer '3%-' unmute
+        'down')
+            $amixer -q sset $mixer "${step}-" unmute
             ;;
 
-        '-t')
+        'toggle')
             $amixer -q sset $mixer toggle
             ;;
 
         *)
-            printf "USAGE: %s up|down|toggle" "$0" 2>&1
+            printf 'usage: %s [ up | down | toggle ]\n' "$0" 2>&1
             exit 1
             ;;
     esac
