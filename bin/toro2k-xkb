@@ -1,74 +1,48 @@
 #!/bin/bash
 
-SETXKBMAP='/usr/bin/setxkbmap'
-LAYOUTS=( us it )
+setxkbmap='/usr/bin/setxkbmap'
+
+default_layout='us'
+layouts=( us it )
 
 
 current_layout() {
-    $SETXKBMAP -query | awk '/layout:/ { print $2; }'
+    $setxkbmap -query | awk '/layout:/ { print $2; }'
 }
 
-set_layout() {
-    $SETXKBMAP "$1"
-    pkill -RTMIN+2 i3blocks
+print_current_layout() {
+    local current_layout=$(current_layout)
+    if [ "$current_layout" = "$default_layout" ]; then
+        printf '\n'
+    else
+        printf '%s\n' "$current_layout"
+        printf '\n'
+        printf '#ff0000'
+    fi
 }
 
-cycle_layout() {
+next_layout() {
     local current_layout=$(current_layout)
     local next_layout_ix=0
     local i
-    for (( i=0; i < ${#LAYOUTS[@]}; ++i )) {
-        if [ "${LAYOUTS[$i]}" = "$current_layout" ]; then
-            next_layout_ix=$(( ( $i + 1 ) % ${#LAYOUTS[@]} ))
+    for (( i=0; i < ${#layouts[@]}; ++i )) {
+        if [ "${layouts[$i]}" = "$current_layout" ]; then
+            next_layout_ix=$(( ( $i + 1 ) % ${#layouts[@]} ))
             break
         fi
     }
-    set_layout "${LAYOUTS[$next_layout_ix]}"
-}
-
-print_layouts() {
-    local current_layout=$(current_layout)
-    for layout in "${LAYOUTS[@]}"; do
-        printf "%s" $layout
-        if [ "$current_layout" = "$layout" ]; then
-            printf " *\n"
-        else
-            printf "\n"
-        fi
-    done
+    $setxkbmap "${layouts[$next_layout_ix]}"
 }
 
 
 if [ $# -eq 0 ]; then
-    current_layout=$(current_layout)
-    if [ "$current_layout" = 'us' ]; then
-        printf "\n"
-    else
-        printf "%s\n" $(current_layout)
-        printf "\n"
-        printf "#ff0000"
-    fi
+    print_current_layout
+elif [ "$1" = 'next' ]; then
+    next_layout
+    pkill -RTMIN+2 i3blocks
 else
-
-    for layout in "${LAYOUTS[@]}"; do
-        if [ "$1" = "$layout" ]; then
-            set_layout "$1"
-            exit 0
-        fi
-    done
-
-    case "$1" in
-        '-c')
-            cycle_layout
-            ;;
-
-        '-l')
-            print_layouts
-            ;;
-
-        *)
-            printf "USAGE: %s [ -q | -l | LAYOUT ]\n" "$0" 2>&1
-            exit 1
-            ;;
-    esac
+    printf 'usage: %s [ next ]\n' "$0" 2>&1
+    exit 1
 fi
+
+exit 0
