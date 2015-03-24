@@ -1,0 +1,35 @@
+#!/usr/bin/env python3
+
+import os
+import subprocess
+import re
+
+def read_iface_up(iface):
+    state_path = os.path.join('/sys/class/net', iface, 'operstate')
+    with open(state_path) as f:
+        return f.read(1) == 'u'
+
+def read_iface_addr(iface):
+    proc = subprocess.Popen(['ip', 'addr', 'show', iface],
+            stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+
+    inet4_pat = re.compile(b'inet ')
+    addr_pat = re.compile(b'(\d{1,3}.\d{1,3}.\d{1,3}.\d{1,3})')
+    for line in proc.stdout:
+        if re.search(inet4_pat, line):
+            match = re.search(addr_pat, line)
+            return match.group(1).decode()
+
+
+
+try:
+    iface = os.environ['BLOCK_INSTANCE']
+except:
+    exit(1)
+
+iface_up = read_iface_up(iface)
+
+if iface_up:
+    addr = read_iface_addr(iface)
+    print('{} {}'.format(iface, addr))
+
