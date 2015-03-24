@@ -17,8 +17,4 @@ export ACK_PAGER=less
 export VISUAL=vi
 export EDITOR=vi
 
-GREP_OPTIONS+=" --exclude-dir=.svn"
-GREP_OPTIONS+=" --exclude-dir=.git"
-export GREP_OPTIONS
-
 [ -r "$HOME/.profile_site" ] && . "$HOME/.profile_site"
