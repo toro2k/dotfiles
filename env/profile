@@ -1,20 +1,34 @@
-if [ -n "$BASH_VERSION" -a -r "$HOME/.bashrc" ]; then
-    . "$HOME/.bashrc"
-fi
+# Why I source bashrc here?
+# if [ -n "$PS1" -a -r "$HOME/.bashrc" ]; then
+#     . "$HOME/.bashrc"
+# fi
 
-if echo $PATH | grep -v -q 'sbin'; then
+if echo "$PATH" | grep -vq 'sbin'; then
     PATH="/usr/local/sbin:/usr/sbin:/sbin:$PATH"
 fi
 
 [ -d "$HOME/bin" ] && PATH="$HOME/bin:$PATH"
 [ -d "$HOME/.rbenv/bin" ] && PATH="$HOME/.rbenv/bin:$PATH"
-[ -d "$HOME/.pyenv/bin" ] && PATH="$HOME/.pyenv/bin:$PATH"
-[ -d "$HOME/.cabal/bin" ] && PATH="$HOME/.cabal/bin:$PATH"
+
+
+[ -r "$HOME/.profile_site" ] && . "$HOME/.profile_site"
+
 
 export PAGER=less
 export ACK_PAGER=less
 
-export VISUAL=vi
-export EDITOR=vi
+for editor in vim vi emacs; do
+    if [ -x "$(which $editor 2>&1)" ]; then
+        EDITOR="$editor"
+        break
+    fi
+done
+export EDITOR
 
-[ -r "$HOME/.profile_site" ] && . "$HOME/.profile_site"
+
+[ -x "$(which rbenv 2>&1)" ] && eval "$(rbenv init -)"
+[ -x "$(which pyenv 2>&1)" ] && eval "$(pyenv init -)"
+
+if [ -x "$(which keychain 2>&1)" ]; then
+    eval "$(keychain --eval --agents ssh --quick --quiet)"
+fi
