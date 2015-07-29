@@ -1,7 +1,7 @@
 scm_prompt() {
-    if command_exists git && is_git_repo; then
+    if [ -x "$(which git 2> /dev/null)" ] && is_git_repo; then
         git_prompt
-    elif command_exists svn && is_svn_repo; then
+    elif [ -x "$(which svn 2> /dev/null)" ] && is_svn_repo; then
         svn_prompt
     fi
 }
@@ -16,8 +16,6 @@ git_prompt() {
     git_status=$(git status --porcelain)
     if [ -z "$git_status" ]; then
         echo -n ''
-
-    # TODO: Not sure about this conditions
     elif echo "$git_status" | grep -q '^[MARCD]'; then
         echo -n ' (staged changes)'
     else
