@@ -6,6 +6,7 @@ shopt -s cdspell
 shopt -s extglob
 shopt -s globstar
 shopt -s no_empty_cmd_completion
+shopt -s checkwinsize
 
 
 alias cp="cp -i"
@@ -40,4 +41,8 @@ fi
 
 if [ -r "$HOME/.bashmarks.sh" ]; then
     source "$HOME/.bashmarsk.sh"
+fi
+
+if [ -x "$(which rbenv 2> /dev/null)" ]; then
+    eval "$(rbenv init -)"
 fi

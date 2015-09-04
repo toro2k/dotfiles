@@ -38,11 +38,6 @@ export LESS_TERMCAP_so=$'\e[01;44;33m'
 export LESS_TERMCAP_ue=$'\e[0m'
 export LESS_TERMCAP_us=$'\e[01;33m'
 
-
-if [ -x "$(which rbenv 2> /dev/null)" ]; then
-    eval "$(rbenv init -)"
-fi
-
 if [ -x "$(which keychain 2> /dev/null)" ]; then
     eval "$(keychain --eval --agents ssh --quick --quiet)"
 fi
