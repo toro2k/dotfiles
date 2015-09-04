@@ -1,0 +1,5 @@
+#!/bin/sh
+
+i3-dmenu-desktop \
+    --dmenu='dmenu -b -p "$ " -fn "Inconsolata-16"' \
+    --entry-type=command
