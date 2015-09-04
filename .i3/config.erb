@@ -6,13 +6,13 @@ for_window [class="Gmrun"] floating enable
 for_window [class="Gmrun"] border 1pixel
 
 bar {
-    status_command i3status.sh
+   status_command i3blocks
 }
 
 set $mod Mod4
 floating_modifier $mod
 
-bindsym $mod+z exec xkb2
+bindsym $mod+z exec i3blocks-xkb next
 
 bindsym $mod+Return exec urxvt
 bindsym $mod+space exec gmrun
@@ -75,9 +75,9 @@ bindsym $mod+Shift+C reload
 bindsym $mod+Shift+R restart
 bindsym $mod+Shift+E exit
 
-bindsym XF86AudioRaiseVolume exec i3-volume up
-bindsym XF86AudioLowerVolume exec i3-volume down
-bindsym XF86AudioMute exec i3-volume toggle
+bindsym XF86AudioRaiseVolume exec i3blocks-volume up
+bindsym XF86AudioLowerVolume exec i3blocks-volume down
+bindsym XF86AudioMute exec i3blocks-volume toggle
 
 bindsym XF86AudioPlay exec audacious --play-pause
 bindsym XF86AudioPrev exec audacious --rew
