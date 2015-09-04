@@ -17,7 +17,7 @@ for dotfile in "$@"; do
     TARGET="$(pwd)/$dotfile"
     LINK_NAME="$HOME/$(basename "$dotfile")"
 
-    if [ -a "$LINK_NAME" -a "$FORCE" -eq 0 ]; then
+    if [ -e "$LINK_NAME" -a "$FORCE" -eq 0 ]; then
         printf "%s: failed to install '%s': File exists\n" "$SCRIPT_NAME" "$LINK_NAME"
         exit 1
     fi

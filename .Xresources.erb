@@ -40,10 +40,11 @@ xterm*eightBitInput: false
 
 URxvt*background: #2e3436
 URxvt*foreground: #ffffff
-URxvt*font: <%= urxvt_font %>
-URxvt*boldFont: <%= urxvt_bold_font %>
+URxvt*font: <%= URXVT_FONT %> <%# 'xft:Inconsolata:size=13' %>
+URxvt*boldFont: <%= URXVT_BOLD_FONT %>
 URxvt*letterSpace: -1
 URxvt*scrollBar: false
-URxvt.perl-lib: /home/toro2k/.urxvt/perl
-URxvt.perl-ext-common: keyboard-select
+URxvt.perl-ext-common: keyboard-select,clipboard
 URxvt.keysym.M-Escape: perl:keyboard-select:activate
+URxvt.keysym.M-y: perl:clipboard:copy
+URxvt.keysym.M-p: perl:clipboard:paste
