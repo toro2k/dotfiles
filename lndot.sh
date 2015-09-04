@@ -1,5 +1,7 @@
 #!/bin/sh
 
+set -e
+
 SCRIPT_NAME=$(basename "$0")
 
 FORCE=0
@@ -22,6 +24,7 @@ for dotfile in "$@"; do
         exit 1
     fi
 
-    ln -sf "$TARGET" "$LINK_NAME"
+    rm -f "$LINK_NAME"
+    ln -s "$TARGET" "$LINK_NAME"
 done
 unset dotfile
