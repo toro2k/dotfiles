@@ -1,0 +1,67 @@
+#!/usr/bin/env python
+
+import os
+
+WARN_THRESHOLD = 0.5
+ALARM_THRESHOLD = 0.2
+URGENT_THRESHOLD = 0.1
+
+def is_battery_present(bat_syspath):
+    return os.path.isdir(bat_syspath)
+
+def read_battery_status(bat_syspath):
+    with open(os.path.join(bat_syspath, 'status')) as f:
+        return f.read().strip()
+
+def read_battery_charge(bat_syspath):
+    with open(os.path.join(BATTERY_SYSPATH, 'charge_now')) as f:
+        charge_now = int(f.read())
+    with open(os.path.join(BATTERY_SYSPATH, 'charge_full')) as f:
+        charge_full = int(f.read())
+
+    charge = charge_now / charge_full
+    if charge > 1: charge = 1
+    return charge
+
+def print_status_and_charge(status, charge):
+    if status == 'Full':
+        print('Battery is full!\nBat full!')
+    else:
+        output = '{s} {c:.0%}\n{s[0]} {c:.0%}'.format(s=status, c=charge)
+        print(output)
+
+def print_color(status, charge):
+    if status == 'Discharging':
+        if charge >= WARN_THRESHOLD:
+            print("#00ff00")
+        elif charge >= ALARM_THRESHOLD:
+            print("#ffff00")
+        else:
+            print("#ff0000")
+
+def is_exit_urgent(status, charge):
+    return status == 'Full' or (
+            status == 'Discharging' and charge < URGENT_THRESHOLD )
+
+
+if __name__ == '__main__':
+
+    BATTERY_NAME = os.getenv('BLOCK_INSTANCE')
+    if not BATTERY_NAME:
+        print("Missing BLOCK_INSTANCE!")
+        exit(1)
+
+    BATTERY_SYSPATH = os.path.join('/sys/class/power_supply/', BATTERY_NAME)
+
+    if not is_battery_present(BATTERY_SYSPATH):
+        print("No battery!\nNo bat!")
+        exit(33)
+
+    battery_status = read_battery_status(BATTERY_SYSPATH)
+    battery_charge = read_battery_charge(BATTERY_SYSPATH)
+
+    print_status_and_charge(battery_status, battery_charge)
+    print_color(battery_status, battery_charge)
+
+    if is_exit_urgent(battery_status, battery_charge):
+        exit(33)

@@ -1,0 +1,40 @@
+#!/usr/bin/env python3
+
+from subprocess import Popen, PIPE, call
+import sys
+
+
+def read_current_layout():
+    proc = Popen(['setxkbmap', '-query'], stdout=PIPE)
+    for line in proc.stdout:
+        if not line.startswith(b'layout:'):
+            continue
+        _, layout = line.split()
+        return layout.decode()
+
+def set_next_layout(layouts, current):
+    layout = next_layout(layouts, current)
+    call(['setxkbmap', layout])
+
+def next_layout(layouts, current):
+    current_index = layouts.index(current)
+    next_index = (current_index + 1) % len(layouts)
+    return layouts[next_index]
+
+
+layouts = ['us', 'it']
+default_layout = layouts[0]
+current_layout = read_current_layout()
+
+if len(sys.argv) == 1:
+    if not current_layout == default_layout:
+        print(current_layout)
+        print(current_layout)
+        print('#ff0000')
+
+elif sys.argv[1] == 'next':
+    set_next_layout(layouts, current_layout)
+    call(['pkill', '-RTMIN+2', 'i3blocks'])
+
+else:
+    exit(1)
