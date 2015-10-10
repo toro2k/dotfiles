@@ -1,5 +1,9 @@
 #!/bin/sh
 
-i3-dmenu-desktop \
-    --dmenu='dmenu -b -p "$ " -fn "Inconsolata-16"' \
-    --entry-type=command
+DMENU_COMMAND='dmenu '
+DMENU_COMMAND+='-p "$ " ' # prompt
+if [ -n "$DMENU_FONT" ]; then
+    DMENU_COMMAND+="-fn $DMENU_FONT "
+fi
+
+i3-dmenu-desktop --dmenu="$DMENU_COMMAND" --entry-type=command
