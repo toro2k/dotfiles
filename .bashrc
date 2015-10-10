@@ -24,8 +24,13 @@ if [ -x "$(which ack-grep 2> /dev/null)" ]; then
     alias ack="ack-grep"
 fi
 
-alias pacman-mine="comm -13 <(pacman -Qq -g base -g base-devel | sort) \
-    <(pacman -Qqe | sort) | xargs pacman -Q"
+alias pac-mine="comm -23 <(pacman -Qqe | sort ) \
+        <(pacman -Qqg base base-devel | sort)"
+alias pac-orphans="pacman -Qqdt"
+alias pac-unreq="pacman -Qqdtt"
+pac-why() {
+    pacman -Qi "$1" | grep --color=no -E 'Required By|Optional For'
+}
 
 alias apt-mine="aptitude search '~i !~M !(~prequired|~pimportant)' | less"
 alias apt-unreq="aptitude search '~i ~M !~RDepends:~i'"
