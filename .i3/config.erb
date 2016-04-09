@@ -1,86 +1,65 @@
+# font pango:Inconsolata 14
 font pango:<%= I3_FONT %>
+
+bar {
+    status_command i3status
+    separator_symbol " | "
+}
 
 focus_follows_mouse no
 
-for_window [class="Gmrun"] floating enable
-for_window [class="Gmrun"] border 1pixel
 
-bar {
-   status_command i3blocks
-}
+bindsym mod4+shift+c reload
+bindsym mod4+shift+r restart
+bindsym mod4+shift+e exit
 
-set $mod Mod4
-floating_modifier $mod
+bindsym mod4+shift+q kill
 
-bindsym $mod+z exec i3blocks-xkb next
+# bindsym mod4+space exec dmenu_run -p '%' -fn 'xft:Inconsolata:size=12'
+bindsym mod4+space exec dmenu_run -p '%' -fn 'xft:<%= DMENU_FONT %>'
+bindsym mod4+return exec urxvt
 
-bindsym $mod+Return exec urxvt
-bindsym $mod+space exec i3-dmenu
+bindsym Mod4+h focus left
+bindsym mod4+j focus down
+bindsym mod4+k focus up
+bindsym mod4+l focus right
 
-bindsym $mod+Shift+Q kill
+bindsym mod4+shift+h move left
+bindsym mod4+shift+j move down
+bindsym mod4+shift+k move up
+bindsym mod4+shift+l move right
 
-bindsym $mod+h focus left
-bindsym $mod+j focus down
-bindsym $mod+k focus up
-bindsym $mod+l focus right
+bindsym mod4+mod1+v split v
+bindsym mod4+mod1+h split h
 
-bindsym $mod+Shift+H move left
-bindsym $mod+Shift+J move down
-bindsym $mod+Shift+K move up
-bindsym $mod+Shift+L move right
+bindsym mod4+f fullscreen
 
-bindsym $mod+Mod1+h split h
-bindsym $mod+Mod1+v split v
+bindsym mod4+s layout stacking
+bindsym mod4+w layout tabbed
+bindsym mod4+e layout default
 
-bindsym $mod+f fullscreen
+bindsym mod4+Shift+space floating toggle
 
-bindsym $mod+s layout stacking
-bindsym $mod+w layout tabbed
-bindsym $mod+e layout default
+bindsym mod4+1 workspace 1
+bindsym mod4+2 workspace 2
+bindsym mod4+3 workspace 3
+bindsym mod4+4 workspace 4
 
-bindsym $mod+Shift+space floating toggle
-# bindsym $mod+space focus mode_toggle
+bindsym mod4+Shift+exclam move container to workspace 1
+bindsym mod4+Shift+at move container to workspace 2
+bindsym mod4+Shift+numbersign move container to workspace 3
+bindsym mod4+Shift+dollar move container to workspace 4
 
-bindsym $mod+a focus parent
-# bindcode $mod+d focus child
+bindsym mod4+Control+h move workspace to output left
+bindsym mod4+Control+l move workspace to output right
+bindsym mod4+Control+k move workspace to output up
+bindsym mod4+Control+j move workspace to output down
 
-bindsym $mod+1 workspace 1
-bindsym $mod+2 workspace 2
-bindsym $mod+3 workspace 3
-bindsym $mod+4 workspace 4
-bindsym $mod+5 workspace 5
-bindsym $mod+6 workspace 6
-bindsym $mod+7 workspace 7
-bindsym $mod+8 workspace 8
-bindsym $mod+9 workspace 9
-bindsym $mod+0 workspace 10
 
-bindsym $mod+Shift+exclam move container to workspace 1
-bindsym $mod+Shift+at move container to workspace 2
-bindsym $mod+Shift+numbersign move container to workspace 3
-bindsym $mod+Shift+dollar move container to workspace 4
-bindsym $mod+Shift+percent move container to workspace 5
-bindsym $mod+Shift+asciicircum move container to workspace 6
-bindsym $mod+Shift+ampersand move container to workspace 7
-bindsym $mod+Shift+asterisk move container to workspace 8
-bindsym $mod+Shift+parenleft move container to workspace 9
-bindsym $mod+Shift+parenright move container to workspace 10
+#bindsym XF86AudioRaiseVolume exec i3blocks-volume up
+#bindsym XF86AudioLowerVolume exec i3blocks-volume down
+#bindsym XF86AudioMute exec i3blocks-volume toggle
 
-bindsym $mod+Control+h move workspace to output left
-bindsym $mod+Control+j move workspace to output down
-bindsym $mod+Control+k move workspace to output up
-bindsym $mod+Control+l move workspace to output right
-
-bindsym $mod+Shift+C reload
-bindsym $mod+Shift+R restart
-bindsym $mod+Shift+E exit
-
-bindsym XF86AudioRaiseVolume exec i3blocks-volume up
-bindsym XF86AudioLowerVolume exec i3blocks-volume down
-bindsym XF86AudioMute exec i3blocks-volume toggle
-
-bindsym XF86AudioPlay exec audacious --play-pause
-bindsym XF86AudioPrev exec audacious --rew
-bindsym XF86AudioNext exec audacious --fwd
+#bindsym mod4+z exec i3blocks-xkb next
 
 bindsym Scroll_Lock exec i3lock -c2e3436
