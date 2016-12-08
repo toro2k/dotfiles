@@ -15,9 +15,9 @@ def read_battery_status(bat_syspath):
 
 def read_battery_charge(bat_syspath):
     with open(os.path.join(BATTERY_SYSPATH, 'charge_now')) as f:
-        charge_now = int(f.read())
+        charge_now = float(f.read())
     with open(os.path.join(BATTERY_SYSPATH, 'charge_full')) as f:
-        charge_full = int(f.read())
+        charge_full = float(f.read())
 
     charge = charge_now / charge_full
     if charge > 1: charge = 1

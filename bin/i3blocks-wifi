@@ -5,12 +5,12 @@ import re
 import os
 
 def read_ssid(iface):
-    proc = subprocess.Popen(['iwgetid', '--raw'], stdout=subprocess.PIPE)
+    proc = subprocess.Popen(['/sbin/iwgetid', '--raw'], stdout=subprocess.PIPE)
     stdout, stderr = proc.communicate()
     return stdout.decode().strip()
 
 def read_quality(iface):
-    proc = subprocess.Popen(['iwconfig', iface], stdout=subprocess.PIPE)
+    proc = subprocess.Popen(['/sbin/iwconfig', iface], stdout=subprocess.PIPE)
     for line in proc.stdout:
         if not b'Quality' in line:
             continue
