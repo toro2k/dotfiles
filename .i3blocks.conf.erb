@@ -6,17 +6,17 @@ command=i3blocks-xkb
 signal=2
 
 [iface]
-instance=eno1
+instance=<%= eth_iface %>
 command=i3blocks-iface
 interval=10
 
 [iface]
-instance=wlp2s0
+instance=<%= wlan_iface %>
 command=i3blocks-iface
 interval=10
 
 [wifi]
-instance=wlp2s0
+instance=<%= wlan_iface %>
 command=i3blocks-wifi
 interval=3
 

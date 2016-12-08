@@ -1,16 +1,22 @@
 require 'erb'
 require 'find'
 require 'set'
+require 'yaml'
 
-class EnvMissingError < NameError;
+CONFIG_FILE_NAME = 'config.yml'
+
+class ConfigMissingError < NameError;
   def initialize(name)
     super('', name)
   end
 end
 
 class GenContext
+
+
   def initialize(gen, erb)
     @gen, @erb = gen, erb
+    @config = YAML.load(File.read(CONFIG_FILE_NAME))
   end
 
   def generate
@@ -18,8 +24,14 @@ class GenContext
     File.write(@gen, erb.result(binding))
   end
 
-  def self.const_missing(c)
-    ENV[c.to_s] or raise EnvMissingError.new(c)
+  def method_missing(method)
+    section = @config[@gen]
+    raise ConfigMissingError.new(@gen) if section.nil?
+
+    config = section[method.to_s]
+    raise ConfigMissingError.new("#{@gen}/#{method}") if config.nil?
+
+    config
   end
 end
 
@@ -48,7 +60,7 @@ gen_paths.zip(erb_paths).each do |gen, erb|
       GenContext.new(gen, erb).generate
     rescue Errno::EACCES => ex
       puts ex.message
-    rescue EnvMissingError => ex
+    rescue ConfigMissingError => ex
       puts "Undefined variable #{ex.name}"
     end
   end

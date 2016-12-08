@@ -1,9 +1,12 @@
 # font pango:Inconsolata 14
-font pango:<%= I3_FONT %>
+font pango:<%= i3_font %>
 
 bar {
-    status_command i3status
-    separator_symbol " | "
+    status_command i3blocks
+
+    # i3bloks doesn't work on FreeBSD
+    # status_command i3status
+    # separator_symbol " | "
 }
 
 focus_follows_mouse no
@@ -16,10 +19,10 @@ bindsym mod4+shift+e exit
 bindsym mod4+shift+q kill
 
 # bindsym mod4+space exec dmenu_run -p '%' -fn 'xft:Inconsolata:size=12'
-bindsym mod4+space exec dmenu_run -p '%' -fn 'xft:<%= DMENU_FONT %>'
-bindsym mod4+return exec urxvt
+bindsym mod4+space exec dmenu_run -p '%' -fn '<%= dmenu_font %>'
+bindsym mod4+Return exec urxvt
 
-bindsym Mod4+h focus left
+bindsym mod4+h focus left
 bindsym mod4+j focus down
 bindsym mod4+k focus up
 bindsym mod4+l focus right
@@ -56,10 +59,10 @@ bindsym mod4+Control+k move workspace to output up
 bindsym mod4+Control+j move workspace to output down
 
 
-#bindsym XF86AudioRaiseVolume exec i3blocks-volume up
-#bindsym XF86AudioLowerVolume exec i3blocks-volume down
-#bindsym XF86AudioMute exec i3blocks-volume toggle
+bindsym XF86AudioRaiseVolume exec i3blocks-volume up
+bindsym XF86AudioLowerVolume exec i3blocks-volume down
+bindsym XF86AudioMute exec i3blocks-volume toggle
 
-#bindsym mod4+z exec i3blocks-xkb next
+bindsym mod4+z exec i3blocks-xkb next
 
 bindsym Scroll_Lock exec i3lock -c2e3436

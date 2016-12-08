@@ -1,2 +1,4 @@
+config.yml
 .Xresources
 .i3/config
+.i3blocks.conf

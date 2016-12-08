@@ -1,0 +1,10 @@
+.Xresources:
+    urxvt_font: xft:Inconsolata:size=13
+
+.i3/config:
+    i3_font: Inconsolata 14
+    dmenu_font: xft:Inconsolata:size=12
+
+.i3blocks.conf:
+    eth_iface: eth0
+    wlan_iface: wlan0
