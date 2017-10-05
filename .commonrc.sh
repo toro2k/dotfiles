@@ -1,7 +1,9 @@
 scm_prompt() {
     if [ -x "$(which git 2> /dev/null)" ] && is_git_repo; then
+        echo -n ' '
         git_prompt
     elif [ -x "$(which svn 2> /dev/null)" ] && is_svn_repo; then
+        echo -n ' '
         svn_prompt
     fi
 }
@@ -50,6 +52,7 @@ has_gnu_coreutils() {
 if has_gnu_coreutils; then
     alias ls="ls --color=auto"
 else
+    # FreeBSD is assumed
     alias ls="ls -G"
 fi
 alias l1="ls -1"
