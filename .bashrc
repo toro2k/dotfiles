@@ -29,9 +29,9 @@ if [[ -z "$SSH_TTY" ]]; then
     fi
 else
     if [[ "$EUID" == 0 ]]; then
-        PS1="\n[\h] \w ${RED}\$\$ ${RESET_COLOR}"
+        PS1="\n[\h] \w ${RED}\\\$\\\$ ${RESET_COLOR}"
     else
-        PS1="\n[\h] \w ${YELLOW}\$\$ ${RESET_COLOR}"
+        PS1="\n[\h] \w ${YELLOW}\\\$\\\$ ${RESET_COLOR}"
     fi
 fi
 
