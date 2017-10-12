@@ -16,9 +16,6 @@ xset s off
 # Turn off bell
 xset b off
 
-# Disable touchpad when typing
-syndaemon -R -i1 &
-
 # Remove mouse cursor from the screen
 unclutter -idle 5 -jitter 30 &
 
