@@ -7,6 +7,9 @@ fi
 if [ -d "$HOME/.rbenv/bin" ]; then
     PATH="$HOME/.rbenv/bin:$PATH"
 fi
+if [ -d "$HOME/.pyenv/bin" ]; then
+    PATH="$HOME/.pyenv/bin:$PATH"
+fi
 export PATH
 
 
