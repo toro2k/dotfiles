@@ -49,12 +49,17 @@ has_gnu_coreutils() {
 }
 
 
+if command -v "dircolors" > /dev/null 2>&1; then
+    eval "$(dircolors -b)"
+fi
+
 if has_gnu_coreutils; then
     alias ls="ls --color=auto"
 else
     # FreeBSD is assumed
     alias ls="ls -G"
 fi
+
 alias l1="ls -1"
 alias ll="ls -lh"
 alias la="ls -A"
@@ -68,15 +73,6 @@ alias grep="grep --color=auto"
 
 if command -v "ack-grep" > /dev/null 2>&1; then
     alias ack="ack-grep"
-fi
-
-
-if command -v "dircolors" > /dev/null 2>&1; then
-    eval "$(dircolors -b)"
-fi
-
-if command -v "rbenv" > /dev/null 2>&1; then
-    eval "$(rbenv init -)"
 fi
 
 
@@ -96,3 +92,35 @@ pac-why() {
 # FreeBSD
 alias pkg-mine="pkg query -e '%a=0' '%o-%v' | sort"
 alias pkg-why="pkg info -r"
+
+
+# rbenv
+if [ -d "$HOME/.rbenv/bin" ]; then
+    export PATH="$HOME/.rbenv/bin:$PATH"
+fi
+
+if command -v "rbenv" > /dev/null 2>&1; then
+    eval "$(rbenv init -)"
+fi
+
+
+# pyenv
+if [ -d "$HOME/.pyenv/bin" ]; then
+    PATH="$HOME/.pyenv/bin:$PATH"
+fi
+
+if command -v "pyenv" > /dev/null 2>&1; then
+    eval "$(pyenv init -)"
+fi
+
+
+# go
+if [ -d "/opt/go/bin" ]; then
+    export PATH="/opt/go/bin:$PATH"
+fi
+
+export GOPATH="$HOME/stuff/dev/projects/go"
+
+# asdf
+. "$HOME/.asdf/asdf.sh"
+. "$HOME/.asdf/completions/asdf.bash"
