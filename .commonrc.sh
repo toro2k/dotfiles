@@ -48,7 +48,6 @@ has_gnu_coreutils() {
     ls --version 2> /dev/null | grep -q 'coreutils'
 }
 
-
 if command -v "dircolors" > /dev/null 2>&1; then
     eval "$(dircolors -b)"
 fi
@@ -77,7 +76,7 @@ fi
 
 
 # Debian
-alias apt-mine="aptitude search '~i !~M !(~prequired|~pimportant)' | less"
+alias apt-mine="aptitude search '~i !~M !(~prequired|~pimportant|~pstandard)' | less"
 alias apt-unreq="aptitude search '~i ~M !~RDepends:~i'"
 
 # Arch
@@ -118,9 +117,11 @@ fi
 if [ -d "/opt/go/bin" ]; then
     export PATH="/opt/go/bin:$PATH"
 fi
-
 export GOPATH="$HOME/stuff/dev/projects/go"
 
+
 # asdf
-. "$HOME/.asdf/asdf.sh"
-. "$HOME/.asdf/completions/asdf.bash"
+if [ -d "$HOME/.asdf" ]; then
+    . "$HOME/.asdf/asdf.sh"
+    . "$HOME/.asdf/completions/asdf.bash"
+fi
