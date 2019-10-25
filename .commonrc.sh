@@ -12,16 +12,24 @@ is_git_repo() {
     git branch &> /dev/null
 }
 
-git_prompt() {
-    echo -n "git: $(git_cur_branch_name)"
+is_git_bare_repo() {
+    [ "$(git rev-parse --is-inside-work-tree 2> /dev/null)" = 'false' ]
+}
 
-    git_status=$(git status --porcelain)
-    if [ -z "$git_status" ]; then
-        echo -n ''
-    elif echo "$git_status" | grep -q '^[MARCD]'; then
-        echo -n ' (staged changes)'
+git_prompt() {
+    if is_git_bare_repo; then
+        echo -n "git: bare repo"
     else
-        echo -n ' (unstaged changes)'
+        echo -n "git: $(git_cur_branch_name)"
+
+        git_status=$(git status --porcelain)
+        if [ -z "$git_status" ]; then
+            echo -n ''
+        elif echo "$git_status" | grep -q '^[MARCD]'; then
+            echo -n ' (staged changes)'
+        else
+            echo -n ' (unstaged changes)'
+        fi
     fi
 }
 
