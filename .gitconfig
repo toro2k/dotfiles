@@ -21,12 +21,12 @@
 [log]
     abbrevCommit = true
 
-[pager]
-    stash = false
-
-[user]
-    name = toro2k
-    email = toro2k@gmail.com
-
 [push]
     default = simple
+
+[merge]
+    tool = vimdiff
+    guitool = gvimdiff
+
+[mergetool]
+    keepBackup = false
