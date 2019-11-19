@@ -1,0 +1,6 @@
+\set PROMPT1 '%n@%m [%/] %R%#%x '
+\set PROMPT2 '%n@%m [%/] %R%#%x '
+
+\pset null '(null)'
+\pset format wrapped
+\pset linestyle unicode
